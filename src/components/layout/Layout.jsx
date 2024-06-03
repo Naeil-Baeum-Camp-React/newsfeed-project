@@ -39,8 +39,9 @@ const Contents = styled.div`
   left: 220px;
   top: 110px;
 
-  background: #ffffff;
-  box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+    background: #FFFFFF;
+    box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    overflow: auto; /* 스크롤 추가 */
 `;
 export default Layout;
