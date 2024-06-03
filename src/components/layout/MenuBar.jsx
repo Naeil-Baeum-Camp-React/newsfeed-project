@@ -38,7 +38,7 @@ const MenuMap = new Map(
   Object.entries(
     {
       // 메뉴명 : path
-      '전체게시글': '/blog/userId',
+      '전체게시글': '/userId/posts',
       '게시글작성': '/',
       '나의이웃': '/',
       '모든블라블라': '/',
