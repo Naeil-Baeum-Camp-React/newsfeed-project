@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import supabase from '../../config/supabase';
+import { useUser } from '../../contexts/login.context';
 
 let CREATE_USER_MESSAGE;
 
 function JoinPage() {
+  const { userData } = useUser();
   const [confirmEmail, setConfirmEmail] = useState(null);
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -34,6 +39,11 @@ function JoinPage() {
     default:
       CREATE_USER_MESSAGE = '이메일 인증으로 로그인을 완료해주세요.';
   }
+
+  if (userData.isLogedIn) {
+    return navigate('/');
+  }
+
   return (
     <div>
       <div>{!confirmEmail && CREATE_USER_MESSAGE}</div>
