@@ -1,28 +1,48 @@
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchPosts } from '../redux/slices/blogSlice.js';
+import supabase from '../config/supabase.js';
+import { useNavigate } from 'react-router-dom';
 
-function PostsList() {
+function Posts() {
+  const posts = useSelector((state) => state.blog.posts);
+  const dispatch = useDispatch();
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    supabase
+      .from('POSTS')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .then(response => {
+        const { error, data: posts } = response;
+        if (error) {
+          console.error(error.message);
+        } else {
+          dispatch(fetchPosts(posts));
+        }
+      });
+  }, []);
+
   return (
     <PostsWrapper>
-      <MenuNameContainer>
+      <MenuNameWrapper>
         <MenuName>전체 게시글</MenuName>
         <MenuNameBottomLine></MenuNameBottomLine>
-      </MenuNameContainer>
+      </MenuNameWrapper>
       <PostsContainer>
-        <PostsBox>
-          <PostsTitle>리액트에 대해서</PostsTitle>
-          <PostsContents>리액트는 정말 재미있다...</PostsContents>
-          <PostsCreatedAt>2024.12.05</PostsCreatedAt>
-        </PostsBox>
-        <PostsBox>
-          <PostsTitle>리액트에 대해서</PostsTitle>
-          <PostsContents>리액트는 정말 재미있다...</PostsContents>
-          <PostsCreatedAt>2024.12.05</PostsCreatedAt>
-        </PostsBox>
-        <PostsBox>
-          <PostsTitle>리액트에 대해서</PostsTitle>
-          <PostsContents>리액트는 정말 재미있다...</PostsContents>
-          <PostsCreatedAt>2024.12.05</PostsCreatedAt>
-        </PostsBox>
+        {
+          posts.map(post => {
+            return (
+              <PostsBox key={post.id} onClick={() => navigate(`/userId/posts/${post.id}`)}>
+                <PostsTitle>{post.title}</PostsTitle>
+                <PostsContents>{post.contents}</PostsContents>
+                <PostsCreatedAt>{post.createdAt}</PostsCreatedAt>
+              </PostsBox>
+            );
+          })
+        }
       </PostsContainer>
     </PostsWrapper>
   );
@@ -43,7 +63,7 @@ const PostsTitle = styled.p`
     color: #000000;
 
 
-`
+`;
 const PostsContents = styled.p`
     width: 100%;
     height: 29px;
@@ -55,11 +75,11 @@ const PostsContents = styled.p`
     line-height: 24px;
 
     color: #000000;
-`
+`;
 const PostsCreatedAt = styled.p`
     width: 100%;
     height: 29px;
-`
+`;
 
 
 const PostsWrapper = styled.div`
@@ -72,7 +92,7 @@ const PostsWrapper = styled.div`
     align-items: center;
 `;
 
-const MenuNameContainer = styled.div`
+const MenuNameWrapper = styled.div`
     margin-top: 50px;
     width: 116px;
     height: 29px;
@@ -116,16 +136,16 @@ const PostsBox = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
+
     border-radius: 4px;
     box-shadow: 0 4px 16px 0 rgba(0, 0, 0, .04);
 
     &:hover {
-        cursor : pointer;
+        cursor: pointer;
         transform: scale(1.03);
         transition: all 0.3s ease;
         box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.10)
     }
 `;
 
-export default PostsList;
+export default Posts;
