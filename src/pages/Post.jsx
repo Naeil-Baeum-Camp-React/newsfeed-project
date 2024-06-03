@@ -1,30 +1,19 @@
+import supabase from '../config/supabase';
 import { useState } from 'react';
 import styled from 'styled-components';
 const Post = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  const handleSave = () => {
-    fetch('/api/posts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, content }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('저장 완료:', data);
-        // 저장 완료 알림 제공
-      })
-      .catch((error) => {
-        console.error('저장 실패:', error);
-        // 저장 실패 알림 제공
-      });
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const { data, error } = await supabase.from('POSTS').insert({ title, contents: content }).select().throwOnError();
   };
 
   return (
     <form>
       <PostTitle placeholder="제목" value={title} onChange={(e) => setTitle(e.target.value)} />
-      <PostBox placeholder="블라블라" value={content} onChange={(e) => setContent(e.target.value)} />
+      <PostContent placeholder="블라블라" value={content} onChange={(e) => setContent(e.target.value)} />
       <ButtonWrapper>
         <SaveButton onClick={handleSave}>저장</SaveButton>
         <CancelButton>취소</CancelButton>
@@ -44,7 +33,7 @@ const PostTitle = styled.input`
   font-size: 20pt;
 `;
 
-const PostBox = styled.div`
+const PostContent = styled.textarea`
   width: 700px;
   min-height: 300px;
   border: 1px solid #d2dade;
