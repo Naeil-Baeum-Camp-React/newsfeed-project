@@ -4,22 +4,14 @@ import styled from 'styled-components';
 function App() {
   return (
     <AppWrapper>
-      <SolidLine>
-        <DottedLine>
-          <Router />
-        </DottedLine>
-      </SolidLine>
+      <DottedLine>
+        <Router />
+      </DottedLine>
     </AppWrapper>
   );
 }
 
 const AppWrapper = styled.div`
-    align-items: center;
-    display: flex;
-    justify-content: center;
-`;
-
-const SolidLine = styled.div`
     box-sizing: border-box;
     position: relative;
     width: 1150px;
@@ -27,6 +19,7 @@ const SolidLine = styled.div`
     border: 1px solid #FFFFFF;
     border-radius: 10px;
 `;
+
 
 const DottedLine = styled.div`
     position: absolute;
