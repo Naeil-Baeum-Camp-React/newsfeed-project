@@ -1,53 +1,31 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
+import { useEffect, useState } from 'react';
 import supabase from './config/supabase.js';
-import { login_user } from './redux/reducers/user.reducer.js';
+import { useUser } from './contexts/login.context.jsx';
 import Router from './shared/Router.jsx';
-import { getDataToLocal, setDataToLocal } from './util/storageFunc.js';
 
 function App() {
-  const dispatch = useDispatch();
-
+  const [session, setSession] = useState(null);
+  const { login, accessUpdate } = useUser();
   useEffect(() => {
-    const userData = getDataToLocal('user');
-    async function getUserFunc() {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      return user;
-    }
-    async function init() {
-      if (userData && userData.isLogin) {
-        dispatch({
-          type: login_user,
-          payload: userData.userObj,
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      if (session) {
+        login();
+        accessUpdate({
+          id: session.user.id,
+          access_token: session.access_token,
         });
-      } else {
-        try {
-          const user = await getUserFunc();
-          console.log('user :', user);
-          dispatch({
-            type: login_user,
-            payload: {
-              type: login_user,
-              payload: {
-                email: user.email,
-                id: user.id,
-              },
-            },
-          });
-          setDataToLocal('user', { isLogin: true, userObj: user });
-        } catch (e) {
-          setDataToLocal('user', {
-            isLogin: false,
-            userObj: {},
-          });
-        }
       }
-    }
-    init();
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
   return (
     <AppWrapper>
