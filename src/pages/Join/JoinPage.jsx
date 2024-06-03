@@ -14,7 +14,6 @@ function JoinPage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formDataObj = Object.fromEntries(formData.entries());
-    console.log(formDataObj.email, formDataObj.password);
     const { data, error } = await supabase.auth.signUp({
       email: formDataObj.email,
       password: formDataObj.password,
