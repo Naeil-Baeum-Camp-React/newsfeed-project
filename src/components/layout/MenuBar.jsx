@@ -38,7 +38,7 @@ const MenuMap = new Map(
   Object.entries(
     {
       // 메뉴명 : path
-      '전체게시글': '/',
+      '전체게시글': '/blog/userId',
       '게시글작성': '/',
       '나의이웃': '/',
       '모든블라블라': '/',
@@ -68,6 +68,12 @@ const Menu = styled.div`
     border: 1px solid #FF9EAA;
     box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
     border-radius: 0px 10px 10px 0px;
+
+    &:hover {
+        cursor : pointer;
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+    }
 `;
 
 const MenuName = styled.p`
