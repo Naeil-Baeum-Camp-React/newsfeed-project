@@ -46,7 +46,6 @@ function JoinPage() {
     const formDataObj = Object.fromEntries(formData.entries());
 
     const errors = userResolver(formDataObj);
-    console.log('errors :', errors);
     if (Object.keys(errors).length !== 0) {
       dispatch({
         type: VALIDATION,
