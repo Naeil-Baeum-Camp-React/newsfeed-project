@@ -9,10 +9,15 @@ function Search({search}) {
     search(keyword);
   }
 
+  const onReset = () => {
+    search("");
+  }
+
   return (
     <form onSubmit={onSubmit}>
       <SearchBar value={keyword} onChange={(e) => seyKeyword(e.target.value)}></SearchBar>
       <SearchButton type={'submit'}> 검색 </SearchButton>
+      <SearchButton type={'button'} onClick={onReset}> 초기화 </SearchButton>
     </form>
   );
 }

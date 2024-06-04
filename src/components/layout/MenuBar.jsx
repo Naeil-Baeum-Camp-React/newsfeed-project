@@ -1,10 +1,25 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../contexts/login.context.jsx';
 
 function MenuBar() {
   const [activeMenuName, setActiveMenu] = useState(localStorage.getItem('activeMenuName') ? localStorage.getItem('activeMenuName') : '전체게시글');
   const navigate = useNavigate();
+  const { userData } = useUser();
+
+  const MenuMap = new Map(
+    Object.entries(
+      {
+        // 메뉴명 : path
+        '전체게시글': `/${userData.userId}/posts`,
+        '게시글작성': '/',
+        '팔로잉 리스트': `/${userData.userId}/following`,
+        '모든블라블라': '/',
+        '슈파베이스 테스트': '/supabase',
+      },
+    ),
+  );
 
   const onClickHandler = (path, menuName) => {
     localStorage.setItem('activeMenuName', menuName);
@@ -33,19 +48,6 @@ function MenuBar() {
     </MenuWrapper>
   );
 }
-
-const MenuMap = new Map(
-  Object.entries(
-    {
-      // 메뉴명 : path
-      '전체게시글': '/userId/posts',
-      '게시글작성': '/',
-      '팔로잉 리스트': '/userId/following',
-      '모든블라블라': '/',
-      '슈파베이스 테스트': '/supabase',
-    },
-  ),
-);
 
 const MenuWrapper = styled.div`
     position: absolute;
