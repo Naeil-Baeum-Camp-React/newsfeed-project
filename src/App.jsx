@@ -30,7 +30,9 @@ function App() {
   return (
     <AppWrapper>
       <DottedLine>
-        <Router />
+        <RouterWrapper>
+          <Router />
+        </RouterWrapper>
       </DottedLine>
     </AppWrapper>
   );
@@ -42,6 +44,18 @@ const AppWrapper = styled.div`
   width: 1150px;
   height: 750px;
   border: 1px solid #ffffff;
+  border-radius: 10px;
+`;
+
+const RouterWrapper = styled.div`
+  position: absolute;
+  width: 1100px;
+  height: 700px;
+  left: calc(50% - 1100px / 2 - 0.5px);
+  top: 5px;
+
+  //background: #FFF6F8;
+  background: #f8f1f3;
   border-radius: 10px;
 `;
 
