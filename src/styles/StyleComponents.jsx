@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import blar_logo from '../asset/logo_blar.svg';
@@ -12,11 +12,15 @@ export const StOuterCard = styled.div`
 `;
 
 export const AuthDefaultLayout = function () {
+  const navigate = useNavigate();
+  const handleClickLogo = () => {
+    return navigate('/');
+  };
   return (
     <AuthContainer>
       <StOuterCard>
         <AuthLogoHeader>
-          <img src={blar_logo} />
+          <img src={blar_logo} onClick={handleClickLogo} />
         </AuthLogoHeader>
         <Outlet />
       </StOuterCard>

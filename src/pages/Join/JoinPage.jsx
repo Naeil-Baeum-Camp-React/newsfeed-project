@@ -98,6 +98,14 @@ function JoinPage() {
             {submitStatus.vaildMessage['password2'] &&
               submitStatus.vaildMessage['password2'].map((msg) => <span key={msg}>{msg}</span>)}
             <button type="submit">가입</button>
+            <button
+              type="button"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              취소
+            </button>
           </form>
         </>
       ) : (
