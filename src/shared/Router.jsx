@@ -7,6 +7,7 @@ import PostDetail from '../pages/PostDetail.jsx';
 import Posts from '../pages/Posts.jsx';
 import SupabaseExample from '../pages/SupabaseExample.jsx';
 import { AuthDefaultLayout } from '../styles/StyleComponents.jsx';
+import Follow from '../pages/follow/Follow.jsx';
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
           <Route path="/supabase" element={<SupabaseExample />} />
           <Route path=":userId/posts" element={<Posts />} />
           <Route path=":userId/posts/:postId" element={<PostDetail />} />
+          <Route path=":userId/following" element={<Follow />} />
           {/*   레이아웃이 필요한 페이지는 supabase와 같이 이 안에 Route 를 넣어주세요 로그인 관련 Route는 밖에 빼주세요.*/}
         </Route>
       </Routes>

@@ -1,5 +1,6 @@
 import { produce } from 'immer';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { getDataToLocal, setDataToLocal } from '../util/storageFunc.js';
 
 const initialState = {
   isLogedIn: false,
@@ -8,8 +9,17 @@ const initialState = {
 };
 
 const UserContext = createContext(initialState);
+
 export function UserProvider({ children }) {
-  const [userData, setUserData] = useState(initialState);
+  const [userData, setUserData] = useState(() => {
+    const storedUserData = getDataToLocal('userData');
+    return storedUserData ? storedUserData : initialState;
+  });
+
+  useEffect(() => {
+    setDataToLocal('userData', userData);
+  }, [userData]);
+
   const value = {
     userData,
     login: () => {
@@ -23,8 +33,11 @@ export function UserProvider({ children }) {
       setUserData((prevState) =>
         produce(prevState, (draft) => {
           draft.isLogedIn = false;
+          draft.userId = '';
+          draft.access_token = '';
         })
       );
+      localStorage.removeItem('userData');
     },
     accessUpdate: ({ id, access_token }) => {
       setUserData((prevState) =>
@@ -33,8 +46,11 @@ export function UserProvider({ children }) {
           draft.access_token = access_token;
         })
       );
+
+      setDataToLocal('userData', userData);
     },
   };
+
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 

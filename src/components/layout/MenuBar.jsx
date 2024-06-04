@@ -40,7 +40,7 @@ const MenuMap = new Map(
       // 메뉴명 : path
       '전체게시글': '/userId/posts',
       '게시글작성': '/',
-      '나의이웃': '/',
+      '팔로잉 리스트': '/userId/following',
       '모든블라블라': '/',
       '슈파베이스 테스트': '/supabase',
     },
