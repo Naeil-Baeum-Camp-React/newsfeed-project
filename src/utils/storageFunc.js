@@ -6,6 +6,7 @@ export const setDataToLocal = (key, value) => {
 // 로컬 스토리지 가져오기
 export const getDataToLocal = (key) => {
   const data = window.localStorage.getItem(key);
+
   if (data && data !== 'undefined') {
     return JSON.parse(data);
   }

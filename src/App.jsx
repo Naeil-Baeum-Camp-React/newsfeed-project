@@ -8,6 +8,7 @@ import Router from './shared/Router.jsx';
 function App() {
   const [session, setSession] = useState(null);
   const { login, accessUpdate } = useUser();
+  
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
