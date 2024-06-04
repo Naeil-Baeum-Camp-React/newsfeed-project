@@ -1,6 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
 import Layout from '../components/layout/Layout.jsx';
 import JoinPage from '../pages/Join/JoinPage.jsx';
+import SetUserData from '../pages/Join/SetUserData.jsx';
 import LoginMainPage from '../pages/Login/LoginMainPage.jsx';
 import LoginPage from '../pages/Login/LoginPage.jsx';
 import PostDetail from '../pages/PostDetail.jsx';
@@ -13,9 +15,11 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route element={<AuthDefaultLayout />}>
-          <Route path="/login" element={<LoginMainPage />}></Route>
-          <Route path="/login/email" element={<LoginPage />}></Route>
-          <Route path="/join" element={<JoinPage />}></Route>
+          <Route path="/login" element={<LoginMainPage />} />
+          <Route path="/login/email" element={<LoginPage />} />
+          <Route path="/join" element={<JoinPage />} />
+          <Route path="/join/info" element={<SetUserData />} />
+          <Route />
         </Route>
 
         <Route path="/" element={<Layout />}>

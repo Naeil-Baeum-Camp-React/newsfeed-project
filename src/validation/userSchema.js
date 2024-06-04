@@ -1,4 +1,5 @@
 import { joinSchema, loginSchema } from './emailSchema';
+import { userInfoSchema } from './userInfoSchema';
 
 // 이메일 회원가입
 export const joinResolver = (formValues) => {
@@ -8,5 +9,10 @@ export const joinResolver = (formValues) => {
 // 이메일 로그인
 export const loginResolver = (formValues) => {
   const { success, error } = loginSchema.safeParse(formValues);
+  return success ? {} : error.flatten().fieldErrors;
+};
+// 유저 데이터 업로드
+export const uploadUserDataResolver = (formValues) => {
+  const { success, error } = userInfoSchema.safeParse(formValues);
   return success ? {} : error.flatten().fieldErrors;
 };
