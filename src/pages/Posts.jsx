@@ -3,18 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchPosts } from '../redux/slices/blogSlice.js';
 import supabase from '../config/supabase.js';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 function Posts() {
+  const {userId} = useParams();
   const posts = useSelector((state) => state.blog.posts);
   const dispatch = useDispatch();
-  let navigate = useNavigate();
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     supabase
       .from('POSTS')
       .select('*')
+      .eq("user_id", userId)
       .order('created_at', { ascending: false })
       .then(response => {
         const { error, data: posts } = response;

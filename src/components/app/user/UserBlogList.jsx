@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-function UserBlogList({followList}) {
+function UserBlogList({userList}) {
   return (
     <UserBlogListContainer>
       {
-        followList.map(follow => {
+        userList.map(follow => {
           return  (
             <UserBox key={follow.id}>
-              <UserProfile></UserProfile>
+              <UserProfile $imageUrl={follow.profileImage}></UserProfile>
               <UserBlogName>{follow.blogName}</UserBlogName>
               <FollowerCount>팔로워 :{follow.followersCount}</FollowerCount>
             </UserBox>
@@ -15,10 +15,8 @@ function UserBlogList({followList}) {
         })
       }
     </UserBlogListContainer>
-
   );
 }
-
 
 const UserBlogListContainer = styled.div`
     width: 100%;
