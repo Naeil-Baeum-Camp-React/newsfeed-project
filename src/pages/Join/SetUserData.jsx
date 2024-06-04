@@ -4,15 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import defaultAvartar from '../../asset/default-profile.jpg';
 import supabase from '../../config/supabase';
 import { useUser } from '../../contexts/login.context';
-import { getUserData } from '../../utils/superBaseFunc';
+import { blobToFile, downloadAvartar, getAvartarUrl, getUserData } from '../../utils/superBaseFunc';
 import { uploadUserDataResolver } from '../../validation/userSchema';
 
 function SetUserData() {
   const navigate = useNavigate();
   const { userData } = useUser();
   const [imgFile, setImgFile] = useState(null);
+  const [imgDefault, setimgDefault] = useState(null);
   const [validErrors, setValidErrors] = useState({});
   const [uploadError, setUploadError] = useState(null);
+  const [createError, setCreateError] = useState(null);
   const [prevUserData, setPrevUserData] = useState(null);
 
   const handleUploadAvartar = (e) => {
@@ -24,8 +26,10 @@ function SetUserData() {
     };
   };
   const handleSumbit = async (e) => {
-    e.prevetDefault();
+    e.preventDefault();
     setValidErrors({});
+    setCreateError(null);
+    setUploadError(null);
 
     const formData = new FormData(e.target);
     const formDataObj = Object.fromEntries(formData.entries());
@@ -37,18 +41,15 @@ function SetUserData() {
     }
 
     // 이미지 먼저 저장
-    const { imgData, imgError } = await supabase.storage
+    const uploadUserResult = await supabase.storage
       .from('avatars')
-      .upload(userData.userId, formDataObj['profile_image'], {
-        cacheControl: '3600',
-        upsert: false,
-      });
+      .upload(userData.userId, formDataObj['profile_image']);
 
     // 저장한 url 받기
-    if (imgError) {
-      return setUploadError(imgError);
+    if (uploadUserResult.error) {
+      return setUploadError(uploadUserResult.error);
     }
-    const urlPath = imgData.path;
+    const urlPath = uploadUserResult.data.path;
 
     // 수퍼 베이스에 유저 데이터 저장하기
     const { data, error } = await supabase
@@ -60,24 +61,40 @@ function SetUserData() {
       })
       .select();
 
-    console.log('유저 데이터', data, error);
+    if (error) {
+      setCreateError(error);
+    }
+
+    if (data) {
+      navigate('/');
+    }
   };
 
   useEffect(() => {
     if (!userData.isLogedIn) {
       return navigate('/login');
     }
-  }, [userData]);
+  }, []);
 
   useEffect(() => {
-    (async () => {
-      const userData = await getUserData();
+    async function getUserFunc(id) {
+      const userData = await getUserData(id);
+      const file = await downloadAvartar(id);
+      const url = getAvartarUrl(id);
+      const convertFile = blobToFile(file, `${userData[0]?.id}.png`);
+      console.log('convertFile :', convertFile);
+      setimgDefault(convertFile);
+      setImgFile(url.publicUrl);
       setPrevUserData(userData);
-    })();
-  }, []);
+    }
+    if (userData?.userId) {
+      getUserFunc(userData.userId);
+    }
+  }, [userData]);
   return (
     <form onSubmit={handleSumbit}>
-      <input name="nickname" type="text" />
+      {createError && <h1>{createError}</h1>}
+      <input name="nickname" type="text" defaultValue={prevUserData ? prevUserData[0].nickname : ''} />
       {validErrors['nickname'] && validErrors['nickname'].map((msg) => <span key={msg}>{msg}</span>)}
 
       {!prevUserData && (
