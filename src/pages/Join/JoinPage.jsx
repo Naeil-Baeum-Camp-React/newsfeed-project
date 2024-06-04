@@ -78,6 +78,19 @@ function JoinPage() {
 
   useEffect(() => {
     if (userData.isLogedIn) {
+      supabase
+        .from('USERS')
+        .insert([
+          {
+            profile_image: 'someValue',
+            blog_name: 'otherValue',
+            nickname: 'otherValue',
+          },
+        ])
+        .select()
+        .then(response => {
+          console.log(response);
+        });
       return navigate('/');
     }
   }, [userData]);
