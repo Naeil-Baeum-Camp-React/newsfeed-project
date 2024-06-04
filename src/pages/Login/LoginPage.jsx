@@ -38,18 +38,16 @@ function LoginPage() {
     }
   }, [userData]);
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input name="email" type="email" />
-        {messsages && messsages['email'] && messsages['email'].map((messsage) => <li key={messsage}>{messsage}</li>)}
-        <input name="password" type="password" />
-        {messsages &&
-          messsages['password'] &&
-          messsages['password'].map((messsage) => <li key={messsage}>{messsage}</li>)}
-        <button type="submit">로그인</button>
-        <Link to="/join">회원가입</Link>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input name="email" type="email" />
+      {messsages && messsages['email'] && messsages['email'].map((messsage) => <li key={messsage}>{messsage}</li>)}
+      <input name="password" type="password" />
+      {messsages &&
+        messsages['password'] &&
+        messsages['password'].map((messsage) => <li key={messsage}>{messsage}</li>)}
+      <button type="submit">로그인</button>
+      <Link to="/join">회원가입</Link>
+    </form>
   );
 }
 
