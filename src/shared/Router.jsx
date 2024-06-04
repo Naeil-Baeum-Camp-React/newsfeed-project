@@ -5,13 +5,16 @@ import LoginPage from '../pages/Login/LoginPage.jsx';
 import PostDetail from '../pages/PostDetail.jsx';
 import Posts from '../pages/Posts.jsx';
 import SupabaseExample from '../pages/SupabaseExample.jsx';
+import { AuthDefaultLayout } from '../styles/StyleComponents.jsx';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/join" element={<JoinPage />}></Route>
+        <Route element={<AuthDefaultLayout />}>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/join" element={<JoinPage />}></Route>
+        </Route>
 
         <Route path="/" element={<Layout />}>
           <Route path="/supabase" element={<SupabaseExample />} />
