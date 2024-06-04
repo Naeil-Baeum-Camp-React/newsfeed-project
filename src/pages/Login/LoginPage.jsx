@@ -20,13 +20,13 @@ function LoginPage() {
       return setMessages(errors);
     }
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithPassword({
       email: formDataObj.email,
       password: formDataObj.password,
     });
-    console.log(data, error);
     if (error) {
       alert('로그인에 실패했습니다!');
+      setMessages(null);
     } else {
       login();
     }
