@@ -1,10 +1,11 @@
 import { produce } from 'immer';
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { boolean } from 'zod';
 import supabase from '../../config/supabase';
 import { useUser } from '../../contexts/login.context';
-import { userResolver } from '../../util/userSchema';
+import { joinResolver } from '../../util/userSchema';
 
 const VALIDATION = 'form-validation';
 const CREATE_FAIL = 'create-fail';
@@ -14,6 +15,7 @@ function submitResultReducer(state, action) {
   switch (action.type) {
     case CREATE_FAIL:
       return produce(state, (draft) => {
+        draft.vaildMessage = {};
         draft.message = '중복되는 이메일입니다.';
       });
 
@@ -21,10 +23,12 @@ function submitResultReducer(state, action) {
       return produce(state, (draft) => {
         draft.message = '이메일 인증으로 로그인을 완료해주세요.';
         draft.email = action.payolad.email;
+        draft.vaildMessage = {};
       });
 
     case VALIDATION:
       return produce(state, (draft) => {
+        draft.message = null;
         draft.vaildMessage = action.payolad;
       });
   }
@@ -36,7 +40,6 @@ function JoinPage() {
     email: null,
     vaildMessage: {},
   });
-  console.log('submitStatus :', submitStatus);
   const { userData } = useUser();
   const navigate = useNavigate();
 
@@ -45,20 +48,20 @@ function JoinPage() {
     const formData = new FormData(e.target);
     const formDataObj = Object.fromEntries(formData.entries());
 
-    const errors = userResolver(formDataObj);
+    const errors = joinResolver(formDataObj);
     if (Object.keys(errors).length !== 0) {
-      dispatch({
+      return dispatch({
         type: VALIDATION,
         payolad: errors,
       });
-      return;
     }
 
     const { data, error } = await supabase.auth.signUp({
       email: formDataObj.email,
       password: formDataObj.password,
     });
-    console.log(data, error);
+    console.log('data :', data, data.user, boolean(data.user));
+    console.log('error :', error);
     if (data.user) {
       // 로그인 입력 이메일을 요청해야함.
       dispatch({
@@ -66,21 +69,24 @@ function JoinPage() {
         payolad: data.user.email,
       });
     } else {
+      console.log('여기');
       dispatch({
         type: CREATE_FAIL,
       });
     }
   };
 
-  if (userData.isLogedIn) {
-    return navigate('/');
-  }
+  useEffect(() => {
+    if (userData.isLogedIn) {
+      return navigate('/');
+    }
+  }, [userData]);
 
   return (
     <div>
       {!submitStatus.email ? (
         <>
-          <h3>{Object.keys(submitStatus.vaildMessage).length !== 0 && submitStatus.message}</h3>
+          <h3>{submitStatus.message}</h3>
           <form onSubmit={handleSubmit}>
             <input name="email" type="email" />
             {submitStatus.vaildMessage['email'] &&
