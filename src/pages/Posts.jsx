@@ -10,6 +10,7 @@ function Posts() {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
+
   useEffect(() => {
     supabase
       .from('POSTS')
