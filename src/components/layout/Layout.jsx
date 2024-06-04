@@ -19,14 +19,8 @@ function Layout() {
 
 const LayoutWrapper = styled.div`
   position: absolute;
-  width: 1100px;
-  height: 700px;
-  left: calc(50% - 1100px / 2 - 0.5px);
-  top: 5px;
-
-  //background: #FFF6F8;
-  background: #f8f1f3;
-  border-radius: 10px;
+  width: 100%;
+  height: 100%;
 `;
 
 const Contents = styled.div`
