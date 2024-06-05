@@ -4,20 +4,20 @@ import MenuBar from './MenuBar.jsx';
 import Profile from './Profile.jsx';
 import Top from './Top.jsx';
 
-function Layout() {
+function BlogLayout() {
   return (
-    <LayoutWrapper>
+    <BlogLayoutWrapper>
       <Top />
       <MenuBar />
       <Contents>
         <Outlet />
       </Contents>
       <Profile />
-    </LayoutWrapper>
+    </BlogLayoutWrapper>
   );
 }
 
-const LayoutWrapper = styled.div`
+const BlogLayoutWrapper = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -35,4 +35,4 @@ const Contents = styled.div`
   border-radius: 10px;
   overflow: auto; /* 스크롤 추가 */
 `;
-export default Layout;
+export default BlogLayout;
