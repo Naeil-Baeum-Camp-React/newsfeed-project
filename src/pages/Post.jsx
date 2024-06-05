@@ -5,17 +5,21 @@ const Post = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
-  const handleSave = async (e) => {
+  const handleInsert = async (e) => {
     e.preventDefault();
     const { data, error } = await supabase.from('POSTS').insert({ title, contents: content }).select().throwOnError();
+    console.log(data);
   };
 
+  // const handleToggle = async (e) => {
+  //   e.preventDefault();
+  // }
   return (
     <form>
       <PostTitle placeholder="제목" value={title} onChange={(e) => setTitle(e.target.value)} />
       <PostContent placeholder="블라블라" value={content} onChange={(e) => setContent(e.target.value)} />
       <ButtonWrapper>
-        <SaveButton onClick={handleSave}>저장</SaveButton>
+        <SaveButton onClick={handleInsert}>저장</SaveButton>
         <CancelButton>취소</CancelButton>
       </ButtonWrapper>
     </form>
@@ -35,7 +39,7 @@ const PostTitle = styled.input`
 
 const PostContent = styled.textarea`
   width: 700px;
-  min-height: 300px;
+  /* min-height: 300px; */
   border: 1px solid #d2dade;
   border-radius: 10px;
   background-color: #ffffff;
