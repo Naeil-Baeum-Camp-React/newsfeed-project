@@ -1,13 +1,13 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import supabase from '../../config/supabase.js';
 import Search from '../../components/common/Search.jsx';
 import UserBlogList from '../../components/app/user/UserBlogList.jsx';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 
 function BlogListPage() {
-  const { userId } = useParams();
   const [blogList, setBlogList] = useState([]);
+  const { userId } = useParams();
 
   useEffect(() => {
     fetchUserBlogList();
@@ -17,6 +17,7 @@ function BlogListPage() {
     supabase
       .from('USERS')
       .select('*')
+      .neq('id', userId)
       .order('created_at', { ascending: false })
       .ilike('blog_name', `%${searchKeyword}%`)
       .then(response => {

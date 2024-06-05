@@ -30,6 +30,10 @@ const SearchBar = styled.input`
     border: 2px solid #E0E0E0;
     border-radius: 20px;
 
+    &:focus {
+        border-color: royalblue; /* Change this to the desired color */
+        outline: none;
+    }
 `
 
 const SearchButton = styled.button`
@@ -40,6 +44,13 @@ const SearchButton = styled.button`
     background: #FFFFFF;
     border: 2px solid #E0E0E0;
     border-radius: 20px;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        transition: all 0.3s ease;
+        border-color: royalblue;
+    }
 `
 
 export default Search;
