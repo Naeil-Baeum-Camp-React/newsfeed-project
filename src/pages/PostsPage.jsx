@@ -7,7 +7,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 
 function PostsPage() {
-  const {userId} = useParams();
+  const { userId } = useParams();
+
   const posts = useSelector((state) => state.blog.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ function PostsPage() {
     supabase
       .from('POSTS')
       .select('*')
-      .eq("user_id", userId)
+      .eq('user_id', userId)
       .order('created_at', { ascending: false })
       .then(response => {
         const { error, data: posts } = response;
@@ -38,7 +39,7 @@ function PostsPage() {
         {
           posts.map(post => {
             return (
-              <PostsBox key={post.id} onClick={() => navigate(`/userId/posts/${post.id}`)}>
+              <PostsBox key={post.id} onClick={() => navigate(`/${userId}/blog/posts/${post.id}`)}>
                 <PostsTitle>{post.title}</PostsTitle>
                 <PostsContents>{post.contents}</PostsContents>
                 <PostsCreatedAt>{post.createdAt}</PostsCreatedAt>
