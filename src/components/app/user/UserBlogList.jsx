@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-function UserBlogList({userList}) {
+function UserBlogList({userBlogList}) {
   return (
     <UserBlogListContainer>
       {
-        userList.map(follow => {
+        userBlogList.map(follow => {
           return  (
             <UserBox key={follow.id}>
               <UserProfile $imageUrl={follow.profileImage}></UserProfile>

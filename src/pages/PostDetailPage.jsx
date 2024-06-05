@@ -4,7 +4,7 @@ import supabase from '../config/supabase.js';
 import { useEffect, useState } from 'react';
 import formatDate, { DATE_FORMATS } from '../utils/dateFormatUtils.js';
 
-function PostDetail() {
+function PostDetailPage() {
   const { postId } = useParams();
   const [post, setPost] = useState({});
   const navigate = useNavigate();
@@ -28,7 +28,6 @@ function PostDetail() {
           created_at: formatDate(new Date(dbPost.created_at), DATE_FORMATS.KOREAN),
         });
       });
-
   }, [postId]);
 
   return (
@@ -91,4 +90,4 @@ const PostContentsContainer = styled.div`
     word-wrap: break-word;
 `;
 
-export default PostDetail;
+export default PostDetailPage;
