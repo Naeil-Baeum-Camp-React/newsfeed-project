@@ -22,7 +22,7 @@ function MenuBar() {
       {
         // 메뉴명 : path
         '전체게시글': `/${userData.userId}/blog/posts`,
-        '게시글작성': '/',
+        '게시글작성': `/${userData.userId}/blog/`,
         '팔로잉 리스트': `/${userData.userId}/following`,
           '모든블라블라': `/${userData.userId}/blogs`,
       },
