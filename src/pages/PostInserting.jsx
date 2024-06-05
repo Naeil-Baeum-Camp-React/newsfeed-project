@@ -1,7 +1,7 @@
 import supabase from '../config/supabase';
 import { useState } from 'react';
 import styled from 'styled-components';
-const Post = () => {
+const PostInserting = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -26,7 +26,7 @@ const Post = () => {
   );
 };
 
-export default Post;
+export default PostInserting;
 
 const PostTitle = styled.input`
   width: 700px;

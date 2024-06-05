@@ -1,6 +1,7 @@
 import { produce } from 'immer';
 import { createContext, useContext, useState, useEffect } from 'react';
 import { getDataToLocal, setDataToLocal } from '../util/storageFunc.js';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
   isLogedIn: false,
@@ -38,6 +39,7 @@ export function UserProvider({ children }) {
         })
       );
       localStorage.removeItem('userData');
+
     },
     accessUpdate: ({ id, access_token }) => {
       setUserData((prevState) =>
