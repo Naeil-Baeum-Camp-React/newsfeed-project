@@ -10,12 +10,11 @@ function MenuBar() {
 
   useEffect(() => {
     navigate(MenuMap.get(activeMenuName));
-  })
+  }, [activeMenuName])
 
   const onClickHandler = (path, menuName) => {
     localStorage.setItem('activeMenuName', menuName);
     setActiveMenu(menuName);
-    navigate(path);
   };
 
   const MenuMap = new Map(
@@ -25,7 +24,7 @@ function MenuBar() {
         '전체게시글': `/${userData.userId}/blog/posts`,
         '게시글작성': '/',
         '팔로잉 리스트': `/${userData.userId}/following`,
-        '모든블라블라': `/${userData.userId}/blogs`,
+          '모든블라블라': `/${userData.userId}/blogs`,
       },
     ),
   );
