@@ -5,7 +5,7 @@ import supabase from '../../config/supabase.js';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-function Follow() {
+function FollowPage() {
   const {userId} = useParams();
   const [followList, setFollowList] = useState([]);
 
@@ -41,7 +41,7 @@ function Follow() {
         <Search search={search} />
       </SearchWrapper>
       <UserBlogListWrapper>
-        <UserBlogList userList={followList} />
+        <UserBlogList userBlogList={followList} />
       </UserBlogListWrapper>
     </FollowingWrapper>
   );
@@ -65,4 +65,4 @@ const SearchWrapper = styled.div`
     margin-bottom: 50px;
 `;
 
-export default Follow;
+export default FollowPage;

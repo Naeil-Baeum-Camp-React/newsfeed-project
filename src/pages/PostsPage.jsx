@@ -6,7 +6,7 @@ import supabase from '../config/supabase.js';
 import { useNavigate, useParams } from 'react-router-dom';
 
 
-function Posts() {
+function PostsPage() {
   const {userId} = useParams();
   const posts = useSelector((state) => state.blog.posts);
   const dispatch = useDispatch();
@@ -151,4 +151,4 @@ const PostsBox = styled.div`
     }
 `;
 
-export default Posts;
+export default PostsPage;

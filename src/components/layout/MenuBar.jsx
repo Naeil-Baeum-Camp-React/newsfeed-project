@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../contexts/login.context.jsx';
 
@@ -8,24 +8,27 @@ function MenuBar() {
   const navigate = useNavigate();
   const { userData } = useUser();
 
-  const MenuMap = new Map(
-    Object.entries(
-      {
-        // 메뉴명 : path
-        '전체게시글': `/${userData.userId}/posts`,
-        '게시글작성': '/',
-        '팔로잉 리스트': `/${userData.userId}/following`,
-        '모든블라블라': '/',
-        '슈파베이스 테스트': '/supabase',
-      },
-    ),
-  );
+  useEffect(() => {
+    navigate(MenuMap.get(activeMenuName));
+  })
 
   const onClickHandler = (path, menuName) => {
     localStorage.setItem('activeMenuName', menuName);
     setActiveMenu(menuName);
     navigate(path);
   };
+
+  const MenuMap = new Map(
+    Object.entries(
+      {
+        // 메뉴명 : path
+        '전체게시글': `/${userData.userId}/blog/posts`,
+        '게시글작성': '/',
+        '팔로잉 리스트': `/${userData.userId}/following`,
+        '모든블라블라': `/${userData.userId}/blogs`,
+      },
+    ),
+  );
 
   return (
     <MenuWrapper>
@@ -85,8 +88,7 @@ const MenuName = styled.p`
     height: 10px;
 
     left: 10px;
-
-
+    
     font-family: 'Inter';
     font-style: normal;
     font-weight: 100;
