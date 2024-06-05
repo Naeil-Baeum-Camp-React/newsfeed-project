@@ -9,6 +9,7 @@ function Top() {
   const { userId } = useParams();
   const [followCount, setFollowCount] = useState(0);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [blogName, setBlogName] = useState("");
 
   const handleClickLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -36,6 +37,7 @@ function Top() {
       .eq('id', userId)
       .then(response => {
         if (!response.error) {
+          setBlogName(response.data[0].blog_name)
           setFollowCount(response.data[0].followers_count);
         }
       });
@@ -111,7 +113,7 @@ function Top() {
           <Logo>
             <LogoText>B</LogoText>
           </Logo>
-          <BlogName>블로그 이름</BlogName>
+          <BlogName>{blogName}</BlogName>
         </BlogNameWrapper>
         <LogoutDiv
           onClick={async () => {
@@ -205,7 +207,6 @@ const BlogName = styled.p`
 
 const RightContainer = styled.div`
     /* Rectangle 262 */
-
     position: absolute;
     width: 868px;
     height: 80px;
