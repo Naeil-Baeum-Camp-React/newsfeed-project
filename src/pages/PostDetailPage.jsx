@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import formatDate, { DATE_FORMATS } from '../utils/dateFormatUtils.js';
 
 function PostDetailPage() {
-  const { postId } = useParams();
+  const { postId, userId } = useParams();
 
   const [post, setPost] = useState({
     id: postId,
@@ -51,13 +51,27 @@ function PostDetailPage() {
     if (error) {
       console.error(error.message);
       alert('게시글 업데이트에 실패했습니다.');
-      // navigate('/:userId/posts');
+      navigate('/:userId/blog/posts');
     }
 
     setPost(...data);
     setIsEditing(false);
     alert('게시글의 수정이 완료되었습니다.');
-    navigate('/userId/blog/posts');
+    navigate(`/${userId}/blog/posts`);
+  };
+
+  const handleDeletePost = async () => {
+    if (window.confirm('정말로 게시글을 삭제하시겠습니까?')) {
+      const { error } = await supabase.from('POSTS').delete().eq('id', postId);
+      console.log(error);
+      if (error) {
+        console.error(error.message);
+        alert('게시글 삭제에 실패했습니다.');
+      } else {
+        alert('게시글이 삭제되었습니다.');
+        navigate(`/${userId}/blog/posts`);
+      }
+    }
   };
 
   return (
@@ -68,7 +82,6 @@ function PostDetailPage() {
         ) : (
           <PostTitle>{post.title}</PostTitle>
         )}
-
         <PostCreatedAt> {post.created_at}</PostCreatedAt>
         <PostTitleLine />
       </PostHeaderContainer>
@@ -82,16 +95,12 @@ function PostDetailPage() {
       <div>
         <button
           onClick={() => {
-            if (isEditing) {
-              handleTogglePost();
-            } else {
-              setIsEditing(true);
-            }
+            isEditing ? handleTogglePost() : setIsEditing(true);
           }}
         >
           수정
         </button>
-        <button>삭제</button>
+        <button onClick={handleDeletePost}>삭제</button>
       </div>
     </PostWrapper>
   );
