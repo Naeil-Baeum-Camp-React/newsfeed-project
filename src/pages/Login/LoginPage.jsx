@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import supabase from '../../config/supabase';
 
 import { useUser } from '../../contexts/login.context';
-import { loginResolver } from '../../util/userSchema';
+import { loginResolver } from '../../validation/userSchema';
 
 function LoginPage() {
   const [messsages, setMessages] = useState(null);
