@@ -1,4 +1,4 @@
-import supabase from '../config/supabase';
+import supabase from '../../config/supabase.js';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';

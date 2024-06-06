@@ -17,6 +17,13 @@ export const updateAvartar = async (name, path) => {
   return updateUserResult;
 };
 
+//유저 이미지 삭제
+export const deleteAvartar = async (name) => {
+  return await supabase.storage.from('avatars').remove([name])
+};
+
+
+
 // 데이터베이스
 // 유저 데이터 정보 가져오기
 export async function getUserData(id) {

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
-import supabase from '../config/supabase.js';
+import supabase from '../../config/supabase.js';
 import { useEffect, useState } from 'react';
-import formatDate, { DATE_FORMATS } from '../utils/dateFormatUtils.js';
+import formatDate, { DATE_FORMATS } from '../../utils/dateFormatUtils.js';
 
 function PostDetailPage() {
   const { postId, userId } = useParams();
