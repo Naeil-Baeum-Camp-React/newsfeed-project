@@ -8,6 +8,7 @@ export const getAvartarUrl = (avartarName) => {
 };
 // 유저 이미지 파일 업로드
 export const uploadAvartar = async (name, path) => {
+  console.log('name :', name, 'path :', path);
   const uploadUserResult = await supabase.storage.from('avatars').upload(name, path);
   return uploadUserResult;
 };
@@ -19,10 +20,8 @@ export const updateAvartar = async (name, path) => {
 
 //유저 이미지 삭제
 export const deleteAvartar = async (name) => {
-  return await supabase.storage.from('avatars').remove([name])
+  return await supabase.storage.from('avatars').remove([name]);
 };
-
-
 
 // 데이터베이스
 // 유저 데이터 정보 가져오기

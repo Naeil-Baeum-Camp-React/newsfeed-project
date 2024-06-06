@@ -11,9 +11,9 @@ function HomePage() {
   useEffect(() => {
     async function init() {
       if (userData.isLogedIn) {
-        const data = await getUserData(userData.id);
+        const data = await getUserData(userData.userId);
         // 유저 객체 존재 여부에 따라
-        if (data) {
+        if (!data) {
           return navigate(`/join/info`);
         } else {
           return navigate(`/${userData.id}/blog/posts`);

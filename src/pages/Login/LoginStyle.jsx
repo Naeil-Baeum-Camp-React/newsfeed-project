@@ -7,6 +7,9 @@ export const StLoginContainer = styled.div`
 `;
 
 export const StTitle = styled.h1`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 100;
