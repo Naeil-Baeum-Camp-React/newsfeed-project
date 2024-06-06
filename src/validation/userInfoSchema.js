@@ -19,3 +19,14 @@ export const userInfoSchema = z
     message: '파일 형식은 .jpg, .jpeg, .png 만 가능합니다.',
     path: ['profile_image'],
   });
+
+export const userInfoUpdateSchema = z.object({
+  nickname: z
+    .string()
+    .max(15, { message: '15자 이하로 입력해주세요.' })
+    .regex(nameRegex, { message: '한글 또는 영문 또는 숫자만 가능합니다.' }),
+  blog_name: z
+    .string()
+    .max(15, { message: '15자 이하로 입력해주세요.' })
+    .regex(nameRegex, { message: '한글 또는 영문 또는 숫자만 가능합니다.' }),
+});
