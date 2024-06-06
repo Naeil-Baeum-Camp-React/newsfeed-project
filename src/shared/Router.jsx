@@ -11,13 +11,16 @@ import PostsPage from '../pages/PostsPage.jsx';
 import BlogListPage from '../pages/blog/BlogListPage.jsx';
 import FollowPage from '../pages/follow/FollowPage.jsx';
 import { AuthDefaultLayout } from '../styles/StyleComponents.jsx';
+import PostInserting from '../pages/PostInserting.jsx';
+import Profile from '../components/layout/Profile.jsx';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-
+        <Route path='/' element={<Profile />} />
+        
         <Route element={<AuthDefaultLayout />}>
           <Route path="/login" element={<LoginMainPage />} />
           <Route path="/login/email" element={<LoginPage />} />
