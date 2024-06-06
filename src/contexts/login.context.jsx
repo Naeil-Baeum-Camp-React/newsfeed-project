@@ -48,7 +48,7 @@ export function UserProvider({ children }) {
       );
 
       setDataToLocal('userData', {
-        id,
+        userId: id,
         access_token,
         isLogedIn: true,
       });
