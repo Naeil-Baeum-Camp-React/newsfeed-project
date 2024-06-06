@@ -1,6 +1,6 @@
 import { produce } from 'immer';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getDataToLocal, setDataToLocal } from '../util/storageFunc.js';
+import { getDataToLocal, setDataToLocal } from '../utils/storageFunc.js';
 
 const initialState = {
   isLogedIn: false,
