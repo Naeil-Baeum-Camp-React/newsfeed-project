@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import emailImage from '../../asset/email.svg';
 import gitImage from '../../asset/github.svg';
 import { setDataToLocal } from '../../utils/storageFunc';
-import { StLoginContainer, StTitle } from './LoginStyle';
+import { StButtonBox, StJoinButton, StLoginContainer, StTitle } from './LoginStyle';
 
 function LoginMainPage() {
   const navigate = useNavigate();
@@ -68,21 +68,6 @@ const StButtonContainer = styled.div`
   align-items: center;
   gap: 15px;
 `;
-const StButtonBox = styled.div`
-  width: 450px;
-  height: 65px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  border-radius: 10px;
-  img {
-    height: 30px;
-    width: 30px;
-    margin-bottom: 5px;
-  }
-`;
 const StEmailBox = styled(StButtonBox)`
   cursor: pointer;
   color: white;
@@ -106,14 +91,3 @@ const StGithubBox = styled(StButtonBox)`
   }
 `;
 const StJoinBox = styled(StButtonContainer)``;
-const StJoinButton = styled(StButtonBox)`
-  cursor: pointer;
-  color: white;
-  background-color: #ff6077;
-  &:hover {
-    background: #ff3553;
-  }
-  img {
-    filter: invert(100%);
-  }
-`;
