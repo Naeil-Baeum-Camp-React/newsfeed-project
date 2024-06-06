@@ -9,6 +9,7 @@ import { AuthDefaultLayout } from '../styles/StyleComponents.jsx';
 import FollowPage from '../pages/follow/FollowPage.jsx';
 import BlogListPage from '../pages/blog/BlogListPage.jsx';
 import HomePage from '../pages/HomePage.jsx';
+import PostInserting from '../pages/PostInserting.jsx';
 
 const Router = () => {
   return (
@@ -22,11 +23,12 @@ const Router = () => {
           <Route path="/join" element={<JoinPage />}></Route>
         </Route>
 
-        <Route element={<BlogLayout />}>
-          <Route path="/:userId/blog/posts" element={<PostsPage />} />
-          <Route path="/:userId/blog/posts/:postId" element={<PostDetailPage />} />
-          <Route path="/:userId/following" element={<FollowPage />} />
-          <Route path="/:userId/blogs" element={<BlogListPage />} />
+        <Route path="/" element={<BlogLayout />}>
+          <Route path=":userId/blog/posts" element={<PostsPage />} />
+          <Route path=":userId/blog/posts/:postId" element={<PostDetailPage />} />
+          <Route path=":userId/blog/posts/insert" element={<PostInserting />}></Route>
+          <Route path=":userId/following" element={<FollowPage />} />
+          <Route path=":userId/blogs" element={<BlogListPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
