@@ -12,14 +12,15 @@ import BlogListPage from '../pages/blog/BlogListPage.jsx';
 import FollowPage from '../pages/follow/FollowPage.jsx';
 import { AuthDefaultLayout } from '../styles/StyleComponents.jsx';
 import PostInserting from '../pages/PostInserting.jsx';
-import Profile from '../components/layout/Profile.jsx';
+import ProfileDetailPage from '../pages/profile/ProfileDetailPage.jsx';
+
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path='/' element={<Profile />} />
+        <Route path="/ProfileDetailPage" element={<ProfileDetailPage />} />
         
         <Route element={<AuthDefaultLayout />}>
           <Route path="/login" element={<LoginMainPage />} />
