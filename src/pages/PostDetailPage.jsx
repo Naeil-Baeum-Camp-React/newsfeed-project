@@ -6,7 +6,16 @@ import formatDate, { DATE_FORMATS } from '../utils/dateFormatUtils.js';
 
 function PostDetailPage() {
   const { postId } = useParams();
-  const [post, setPost] = useState({});
+
+  const [post, setPost] = useState({
+    id: postId,
+    title: '',
+    contents: '',
+  });
+  const [isEditing, setIsEditing] = useState(false);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,14 +24,14 @@ function PostDetailPage() {
       .select('*')
       .eq('id', postId)
       .then((response) => {
-        const {data, error} = response;
-        if (error){
+        const { data, error } = response;
+        if (error) {
           console.error(error.message);
-          alert("오류가 발생했습니다.");
-          navigate("/userId/posts")
+          alert('오류가 발생했습니다.');
+          navigate('/userId/blog/posts');
         }
 
-        const dbPost = data.find(dbData => dbData.id === postId);
+        const dbPost = data.find((dbData) => dbData.id === postId);
         setPost({
           ...dbPost,
           created_at: formatDate(new Date(dbPost.created_at), DATE_FORMATS.KOREAN),
@@ -30,64 +39,106 @@ function PostDetailPage() {
       });
   }, [postId]);
 
+  const handleTogglePost = async () => {
+    const { data, error } = await supabase
+      .from('POSTS')
+      .update({
+        title: title,
+        contents: content,
+      })
+      .eq('id', postId)
+      .select();
+    if (error) {
+      console.error(error.message);
+      alert('게시글 업데이트에 실패했습니다.');
+      // navigate('/:userId/posts');
+    }
+
+    setPost(...data);
+    setIsEditing(false);
+    alert('게시글의 수정이 완료되었습니다.');
+    navigate('/userId/blog/posts');
+  };
+
   return (
     <PostWrapper>
       <PostHeaderContainer>
-        <PostTitle>
-          {post.title}
-        </PostTitle>
-        <PostCreatedAt>  {post.created_at}</PostCreatedAt>
+        {isEditing ? (
+          <input placeholder={post.title} onChange={(e) => setTitle(e.target.value)} />
+        ) : (
+          <PostTitle>{post.title}</PostTitle>
+        )}
+
+        <PostCreatedAt> {post.created_at}</PostCreatedAt>
         <PostTitleLine />
       </PostHeaderContainer>
       <PostContentsContainer>
-        {post.contents}
+        {isEditing ? (
+          <textarea placeholder={post.contents} onChange={(e) => setContent(e.target.value)} />
+        ) : (
+          post.contents
+        )}
       </PostContentsContainer>
+      <div>
+        <button
+          onClick={() => {
+            if (isEditing) {
+              handleTogglePost();
+            } else {
+              setIsEditing(true);
+            }
+          }}
+        >
+          수정
+        </button>
+        <button>삭제</button>
+      </div>
     </PostWrapper>
   );
 }
 
 const PostWrapper = styled.div`
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top: 50px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-top: 50px;
 `;
 const PostHeaderContainer = styled.div`
-    width: 487px;
-    height: 100px;
+  width: 487px;
+  height: 100px;
 `;
 const PostTitle = styled.p`
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 30px;
-    line-height: 50px;
-    text-align: center;
-    color: #000000;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+  color: #000000;
 `;
 
 const PostTitleLine = styled.div`
-    width: 50px;
-    margin: 0 auto;
-    border: 1px solid #3AA6B9;
+  width: 50px;
+  margin: 0 auto;
+  border: 1px solid #3aa6b9;
 `;
 
 const PostCreatedAt = styled.div`
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 100;
-    font-size: 15px;
-    line-height: 50px;
-    text-align: center;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 15px;
+  line-height: 50px;
+  text-align: center;
 `;
 
 const PostContentsContainer = styled.div`
-    width: 500px;
-    background: #FFFFFF;
-    word-wrap: break-word;
+  width: 500px;
+  background: #ffffff;
+  word-wrap: break-word;
 `;
 
 export default PostDetailPage;
