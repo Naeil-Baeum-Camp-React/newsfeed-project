@@ -1,13 +1,21 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-function UserBlogList({userList}) {
+function UserBlogList({userBlogList}) {
+
+  const navigate = useNavigate();
+
+  const moveTargetUserBlog = (targetUserId) => {
+    navigate(`/${targetUserId}/blog/posts`);
+  }
+
   return (
     <UserBlogListContainer>
       {
-        userList.map(follow => {
+        userBlogList.map(follow => {
           return  (
-            <UserBox key={follow.id}>
-              <UserProfile $imageUrl={follow.profileImage}></UserProfile>
+            <UserBox key={follow.id} onClick={() => moveTargetUserBlog(follow.id)}>
+              <UserProfile src={follow.profileImage}></UserProfile>
               <UserBlogName>{follow.blogName}</UserBlogName>
               <FollowerCount>팔로워 :{follow.followersCount}</FollowerCount>
             </UserBox>
@@ -34,9 +42,17 @@ const UserBox = styled.div`
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.03);
+        transition: all 0.3s ease;
+        box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.10)
+    }
 `;
 
-const UserProfile = styled.image`
+const UserProfile = styled.img`
     width: 150px;
     height: 150px;
     background: #D9D9D9;

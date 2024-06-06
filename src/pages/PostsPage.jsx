@@ -5,9 +5,9 @@ import { fetchPosts } from '../redux/slices/blogSlice.js';
 import supabase from '../config/supabase.js';
 import { useNavigate, useParams } from 'react-router-dom';
 
+function PostsPage() {
+  const { userId } = useParams();
 
-function Posts() {
-  const {userId} = useParams();
   const posts = useSelector((state) => state.blog.posts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,9 +16,9 @@ function Posts() {
     supabase
       .from('POSTS')
       .select('*')
-      .eq("user_id", userId)
+      .eq('user_id', userId)
       .order('created_at', { ascending: false })
-      .then(response => {
+      .then((response) => {
         const { error, data: posts } = response;
         if (error) {
           console.error(error.message);
@@ -26,7 +26,7 @@ function Posts() {
           dispatch(fetchPosts(posts));
         }
       });
-  }, []);
+  }, [userId, dispatch]);
 
   return (
     <PostsWrapper>
@@ -38,7 +38,7 @@ function Posts() {
         {
           posts.map(post => {
             return (
-              <PostsBox key={post.id} onClick={() => navigate(`/userId/posts/${post.id}`)}>
+              <PostsBox key={post.id} onClick={() => navigate(`/${userId}/blog/posts/${post.id}`)}>
                 <PostsTitle>{post.title}</PostsTitle>
                 <PostsContents>{post.contents}</PostsContents>
                 <PostsCreatedAt>{post.createdAt}</PostsCreatedAt>
@@ -54,7 +54,7 @@ function Posts() {
 const PostsTitle = styled.p`
     width: 100%;
     height: 29px;
-
+    
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -64,12 +64,14 @@ const PostsTitle = styled.p`
     text-align: center;
 
     color: #000000;
-
-
+    
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 const PostsContents = styled.p`
     width: 100%;
-    height: 29px;
+    height: 100px;
 
     font-family: 'Inter';
     font-style: normal;
@@ -78,12 +80,15 @@ const PostsContents = styled.p`
     line-height: 24px;
 
     color: #000000;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
 `;
 const PostsCreatedAt = styled.p`
     width: 100%;
     height: 29px;
 `;
-
 
 const PostsWrapper = styled.div`
     width: 100%;
@@ -151,4 +156,4 @@ const PostsBox = styled.div`
     }
 `;
 
-export default Posts;
+export default PostsPage;
