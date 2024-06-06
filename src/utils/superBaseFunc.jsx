@@ -9,14 +9,11 @@ export const getAvartarUrl = (avartarName) => {
 // 유저 이미지 파일 업로드
 export const uploadAvartar = async (name, path) => {
   const uploadUserResult = await supabase.storage.from('avatars').upload(name, path);
-  console.log(uploadUserResult);
   return uploadUserResult;
 };
 // 유저 이미지 파일 수정
 export const updateAvartar = async (name, path) => {
-  console.log(name, path);
   const updateUserResult = await supabase.storage.from('avatars').update(name, path);
-  console.log(updateUserResult);
   return updateUserResult;
 };
 
