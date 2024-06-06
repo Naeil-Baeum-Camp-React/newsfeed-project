@@ -7,10 +7,11 @@ const initialState = {
 
 const blogSlice = createSlice({
   name: 'blog', // 이 모듈의 이름
-  initialState,   // 이 모듈의 초기상태 값
-  reducers: {  // 이 모듈의 Reducer 로직
+  initialState, // 이 모듈의 초기상태 값
+  reducers: {
+    // 이 모듈의 Reducer 로직
     fetchPosts: (state, action) => {
-      state.posts = action.payload.map(post => {
+      state.posts = action.payload.map((post) => {
         return {
           id: post.id,
           contents: post.contents,
