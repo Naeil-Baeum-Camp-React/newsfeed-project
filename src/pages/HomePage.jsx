@@ -12,7 +12,6 @@ function HomePage() {
     async function init() {
       if (userData.isLogedIn) {
         const data = await getUserData(userData.id);
-        console.log(data.length === 0);
         // 유저 객체 존재 여부에 따라
         if (data) {
           return navigate(`/join/info`);
