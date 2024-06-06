@@ -9,6 +9,8 @@ export const StOuterCard = styled.div`
   border-radius: 10px;
   box-sizing: content-box;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const AuthDefaultLayout = function () {
