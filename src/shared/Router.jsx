@@ -11,7 +11,7 @@ import PostsPage from '../pages/PostsPage.jsx';
 import BlogListPage from '../pages/blog/BlogListPage.jsx';
 import FollowPage from '../pages/follow/FollowPage.jsx';
 import { AuthDefaultLayout } from '../styles/StyleComponents.jsx';
-import PostInserting from '../pages/PostInserting.jsx';
+// import PostInserting from '../pages/PostInserting.jsx';
 import ProfileDetailPage from '../pages/profile/ProfileDetailPage.jsx';
 
 

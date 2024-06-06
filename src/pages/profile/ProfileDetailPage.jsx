@@ -7,15 +7,15 @@ import { useNavigate } from "react-router-dom";
 function ProfileDetailPage() {
     
     const {userData} = useUser()
-    const fileInput = useRef()
+    // const fileInput = useRef()
     const navigate = useNavigate()
     const [userImage, setUserImage] = useState("");
     const [nickName, setNickName] = useState("");
     const [userInformation, setUserInformation] = useState("");
     const [blogNameModify, setBlogNameModify] = useState("");
     const [gitHubUrlLinks, setGitHubUrlLinks] = useState("");
-    const [saveBtn, setSaveBtn] = useState("");
-    const [cancelBtn, setCancelBtn] = useState("");
+    // const [saveBtn, setSaveBtn] = useState("");
+    // const [cancelBtn, setCancelBtn] = useState("");
 
     useEffect(() => {
         supabase
