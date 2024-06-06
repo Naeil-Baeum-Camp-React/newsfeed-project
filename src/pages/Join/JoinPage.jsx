@@ -2,10 +2,9 @@ import { produce } from 'immer';
 import { useEffect, useReducer } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { boolean } from 'zod';
 import supabase from '../../config/supabase';
 import { useUser } from '../../contexts/login.context';
-import { joinResolver } from '../../util/userSchema';
+import { joinResolver } from '../../validation/userSchema';
 
 const VALIDATION = 'form-validation';
 const CREATE_FAIL = 'create-fail';
@@ -60,14 +59,13 @@ function JoinPage() {
       email: formDataObj.email,
       password: formDataObj.password,
     });
-    console.log('data :', data, data.user, boolean(data.user));
-    console.log('error :', error);
     if (data.user) {
       // 로그인 입력 이메일을 요청해야함.
       dispatch({
         type: CREATE_SUCCESS,
         payolad: data.user.email,
       });
+      return navigate('/join/info');
     } else {
       console.log('여기');
       dispatch({
@@ -78,19 +76,6 @@ function JoinPage() {
 
   useEffect(() => {
     if (userData.isLogedIn) {
-      supabase
-        .from('USERS')
-        .insert([
-          {
-            profile_image: 'someValue',
-            blog_name: 'otherValue',
-            nickname: 'otherValue',
-          },
-        ])
-        .select()
-        .then(response => {
-          console.log(response);
-        });
       return navigate('/');
     }
   }, [userData]);
