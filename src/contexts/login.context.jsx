@@ -1,6 +1,6 @@
 import { produce } from 'immer';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { getDataToLocal, setDataToLocal } from '../utils/storageFunc.js';
+import { getDataToLocal, setDataToLocal } from '../utils/storageFunc';
 
 const initialState = {
   isLogedIn: false,
@@ -47,7 +47,11 @@ export function UserProvider({ children }) {
         })
       );
 
-      setDataToLocal('userData', userData);
+      setDataToLocal('userData', {
+        userId: id,
+        access_token,
+        isLogedIn: true,
+      });
     },
   };
 

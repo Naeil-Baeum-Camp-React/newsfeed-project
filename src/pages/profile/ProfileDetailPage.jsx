@@ -23,6 +23,7 @@ function ProfileDetailPage() {
       .select('*')
       .eq('id', userData.userId)
       .then(response => {
+        debugger
         if (!response.error) {
           setUserImage(response.data[0].profile_image);
           setNickName(response.data[0].nickname);
@@ -47,8 +48,8 @@ function ProfileDetailPage() {
           git_hub_url: gitHubUrlLinks,
         },
       )
-      .eq('id', userData.userId)
       .select()
+      .eq('id', userData.userId)
       .then(response => {
         if (!response.error) {
           alert('저장 되었습니다!');
@@ -70,20 +71,14 @@ function ProfileDetailPage() {
       <Wrapper>
         <Logo><Text>BLAR</Text></Logo>
         <Border></Border>
-        <Image src={userImage}
-               onClick={() => fileInput.current.click()}></Image>
+        <Image src={userImage} onClick={() => fileInput.current.click()}></Image>
         <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} />
-        <NickName value={nickName}
-                  onChange={(e) => setNickName(e.target.value)}></NickName>
-        <ProfileBasics value={userInformation}
-                       onChange={(e) => setUserInformation(e.target.value)}></ProfileBasics>
-        <BlogName value={blogNameModify}
-                  onChange={(e) => setBlogNameModify(e.target.value)}></BlogName>
-        <GigHubUrlLink value={gitHubUrlLinks}
-                       onChange={(e) => setGitHubUrlLinks(e.target.value)}></GigHubUrlLink>
+        <NickName value={nickName} onChange={(e) => setNickName(e.target.value)}></NickName>
+        <ProfileBasics value={userInformation} onChange={(e) => setUserInformation(e.target.value)}></ProfileBasics>
+        <BlogName value={blogNameModify} onChange={(e) => setBlogNameModify(e.target.value)}></BlogName>
+        <GigHubUrlLink value={gitHubUrlLinks} onChange={(e) => setGitHubUrlLinks(e.target.value)}></GigHubUrlLink>
         <SaveButton onClick={handlerSaveBtn}>저장</SaveButton>
-        <CancelButton
-          onClick={() => navigate(`/${userData.userId}/blog/posts`)}>취소</CancelButton>
+        <CancelButton onClick={() => navigate(`/${userData.userId}/blog/posts`)}>취소</CancelButton>
       </Wrapper>
     </>
   );
