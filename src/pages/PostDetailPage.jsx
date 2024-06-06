@@ -78,30 +78,32 @@ function PostDetailPage() {
       <PostWrapper>
         <PostHeaderContainer>
           {isEditing ? (
-            <input placeholder={post.title} onChange={(e) => setTitle(e.target.value)} />
+            <PostTitle placeholder={post.title} onChange={(e) => setTitle(e.target.value)} />
           ) : (
-            <PostTitle>{post.title}</PostTitle>
+            <PostTitleP>{post.title}</PostTitleP>
           )}
           <PostCreatedAt> {post.created_at}</PostCreatedAt>
           <PostTitleLine />
         </PostHeaderContainer>
-        <PostContentsContainer>
-          {isEditing ? (
-            <textarea placeholder={post.contents} onChange={(e) => setContent(e.target.value)} />
-          ) : (
-            post.contents
-          )}
-        </PostContentsContainer>
-        <div>
-          <button
+        {isEditing ? (
+          <PostContent placeholder={post.contents} onChange={(e) => setContent(e.target.value)} />
+        ) : (
+          <PostContentP>{post.contents}</PostContentP>
+        )}
+        <ButtonWrapper>
+          <PostSaveButton
             onClick={() => {
               isEditing ? handleTogglePost() : setIsEditing(true);
             }}
           >
             {isEditing ? '수정 완료' : '수정'}
-          </button>
-          <button onClick={handleDeletePost}>{isEditing ? '수정 취소' : '삭제'}</button>
-        </div>
+          </PostSaveButton>
+          {isEditing ? (
+            <PostCancelButton onClick={() => navigate(`/${userId}/blog/posts`)}>수정 취소</PostCancelButton>
+          ) : (
+            <PostCancelButton onClick={handleDeletePost}>삭제</PostCancelButton>
+          )}
+        </ButtonWrapper>
       </PostWrapper>
     </>
   );
@@ -117,12 +119,26 @@ const PostWrapper = styled.div`
   flex-wrap: wrap;
   align-items: center;
   margin-top: 50px;
+  gap: 30px;
 `;
 const PostHeaderContainer = styled.div`
-  width: 487px;
-  height: 100px;
+  width: 100%;
+  min-height: 100px;
 `;
-const PostTitle = styled.p`
+
+const PostTitle = styled.input`
+  width: 90%;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 50px;
+  text-align: center;
+  color: #000000;
+  border: 1px solid #d2dade;
+  border-radius: 10px;
+`;
+const PostTitleP = styled.p`
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
@@ -147,8 +163,76 @@ const PostCreatedAt = styled.div`
   text-align: center;
 `;
 
-const PostContentsContainer = styled.div`
-  width: 500px;
-  background: #ffffff;
-  word-wrap: break-word;
+const PostContent = styled.textarea`
+  width: 90%;
+  min-height: 200px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  color: #000000;
+  border: 1px solid #d2dade;
+  border-radius: 10px;
+  background-color: #ffffff;
+`;
+
+const PostContentP = styled.p`
+  width: 90%;
+  min-height: 200px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 50px;
+  text-align: center;
+  color: #000000;
+  background-color: #ffffff;
+`;
+
+const ButtonWrapper = styled.div`
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+`;
+
+const PostSaveButton = styled.button`
+  min-width: 100px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  background-color: #3aa6b9;
+  border: 1px solid #3aa6b9;
+  border-radius: 10px;
+  color: white;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 0.1s ease;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+`;
+const PostCancelButton = styled.button`
+  min-width: 100px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  background-color: white;
+  border: 1px solid #3aa6b9;
+  border-radius: 10px;
+  color: #3aa6b9;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 0.1s ease;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+  }
 `;

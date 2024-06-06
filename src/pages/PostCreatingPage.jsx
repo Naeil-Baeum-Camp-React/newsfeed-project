@@ -29,24 +29,15 @@ const PostCreatingPage = () => {
 
   return (
     <PostWrapper>
-      <PostHeaderContainer>
-        <PostTitle
-          placeholder="게시글의 제목을 입력해주세요."
-          value={post.title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <PostTitleLine />
-      </PostHeaderContainer>
-      <PostContentsContainer>
-        <PostContent
-          placeholder="게시글의 내용을 입력해주세요."
-          value={post.contents}
-          onChange={(e) => setContent(e.target.value)}
-        />
-      </PostContentsContainer>
+      <PostTitle placeholder="게시글의 제목을 입력해주세요." value={title} onChange={(e) => setTitle(e.target.value)} />
+      <PostContent
+        placeholder="게시글의 내용을 입력해주세요."
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
       <ButtonWrapper>
-        <PostButton onClick={handleCreatePost}>저장</PostButton>
-        <PostButton onClick={navigate(`/${userId}/blog/posts`)}>취소</PostButton>
+        <PostSaveButton onClick={handleCreatePost}>저장</PostSaveButton>
+        <PostCancelButton onClick={() => navigate(`/${userId}/blog/posts`)}>취소</PostCancelButton>
       </ButtonWrapper>
     </PostWrapper>
   );
@@ -61,14 +52,10 @@ const PostWrapper = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-
   margin-top: 50px;
+  gap: 30px;
 `;
-const PostHeaderContainer = styled.div`
-  width: 100%;
-  height: 100px;
-  padding-left: 30px;
-`;
+
 const PostTitle = styled.input`
   width: 90%;
   font-family: 'Inter';
@@ -78,19 +65,8 @@ const PostTitle = styled.input`
   line-height: 50px;
   text-align: center;
   color: #000000;
-`;
-
-const PostTitleLine = styled.div`
-  width: 50px;
-  margin: 0 auto;
-  border: 1px solid #3aa6b9;
-`;
-
-const PostContentsContainer = styled.div`
-  width: 100%;
-  background: #ffffff;
-  word-wrap: break-word;
-  padding-left: 30px;
+  border: 1px solid #d2dade;
+  border-radius: 10px;
 `;
 
 const PostContent = styled.textarea`
@@ -116,7 +92,39 @@ const ButtonWrapper = styled.div`
   justify-content: center;
   gap: 10px;
 `;
+const PostSaveButton = styled.button`
+  min-width: 100px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  background-color: #3aa6b9;
+  border: 1px solid #3aa6b9;
+  border-radius: 10px;
+  color: white;
 
-const PostButton = styled.button`
-  width: 100px;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 0.1s ease;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+`;
+const PostCancelButton = styled.button`
+  min-width: 100px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  background-color: white;
+  border: 1px solid #3aa6b9;
+  border-radius: 10px;
+  color: #3aa6b9;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+    transition: all 0.1s ease;
+    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
+  }
 `;

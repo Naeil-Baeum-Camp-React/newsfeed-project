@@ -5,7 +5,6 @@ import { fetchPosts } from '../redux/slices/blogSlice.js';
 import supabase from '../config/supabase.js';
 import { useNavigate, useParams } from 'react-router-dom';
 
-
 function PostsPage() {
   const { userId } = useParams();
 
@@ -19,7 +18,7 @@ function PostsPage() {
       .select('*')
       .eq('user_id', userId)
       .order('created_at', { ascending: false })
-      .then(response => {
+      .then((response) => {
         const { error, data: posts } = response;
         if (error) {
           console.error(error.message);
@@ -90,7 +89,6 @@ const PostsCreatedAt = styled.p`
     width: 100%;
     height: 29px;
 `;
-
 
 const PostsWrapper = styled.div`
     width: 100%;
