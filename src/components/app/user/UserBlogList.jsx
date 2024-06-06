@@ -15,7 +15,7 @@ function UserBlogList({userBlogList}) {
         userBlogList.map(follow => {
           return  (
             <UserBox key={follow.id} onClick={() => moveTargetUserBlog(follow.id)}>
-              <UserProfile $imageUrl={follow.profileImage}></UserProfile>
+              <UserProfile src={follow.profileImage}></UserProfile>
               <UserBlogName>{follow.blogName}</UserBlogName>
               <FollowerCount>팔로워 :{follow.followersCount}</FollowerCount>
             </UserBox>
@@ -42,6 +42,7 @@ const UserBox = styled.div`
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
 
     &:hover {
         cursor: pointer;
@@ -51,7 +52,7 @@ const UserBox = styled.div`
     }
 `;
 
-const UserProfile = styled.image`
+const UserProfile = styled.img`
     width: 150px;
     height: 150px;
     background: #D9D9D9;

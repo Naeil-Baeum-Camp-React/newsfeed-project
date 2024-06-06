@@ -27,7 +27,7 @@ function PostsPage() {
           dispatch(fetchPosts(posts));
         }
       });
-  }, []);
+  }, [userId, dispatch]);
 
   return (
     <PostsWrapper>
@@ -55,7 +55,7 @@ function PostsPage() {
 const PostsTitle = styled.p`
     width: 100%;
     height: 29px;
-
+    
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -65,12 +65,14 @@ const PostsTitle = styled.p`
     text-align: center;
 
     color: #000000;
-
-
+    
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
 const PostsContents = styled.p`
     width: 100%;
-    height: 29px;
+    height: 100px;
 
     font-family: 'Inter';
     font-style: normal;
@@ -79,6 +81,10 @@ const PostsContents = styled.p`
     line-height: 24px;
 
     color: #000000;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
 `;
 const PostsCreatedAt = styled.p`
     width: 100%;
