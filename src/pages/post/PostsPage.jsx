@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchPosts } from '../redux/slices/blogSlice.js';
-import supabase from '../config/supabase.js';
+import { fetchPosts } from '../../redux/slices/blogSlice.js';
+import supabase from '../../config/supabase.js';
 import { useNavigate, useParams } from 'react-router-dom';
 
 function PostsPage() {

@@ -8,6 +8,7 @@ function ProfileDetailPage() {
     
     const {userData} = useUser()
     const fileInput = useRef()
+
     const navigate = useNavigate()
     const [userImage, setUserImage] = useState("");
     const [nickName, setNickName] = useState("");
@@ -64,7 +65,7 @@ function ProfileDetailPage() {
                 <Logo><Text>BLAR</Text></Logo>
                 <Border></Border>
                 <Image src={userImage}></Image>
-                <input type="file" hidden/>
+                <input type="file" ref={fileInput} hidden/>
                 <NickName value={nickName} onChange={(e) => setNickName(e.target.value)}></NickName>
                 <ProfileBasics value={userInformation} onChange={(e) => setUserInformation(e.target.value)}></ProfileBasics>
                 <BlogName value={blogNameModify} onChange={(e) => setBlogNameModify(e.target.value)}></BlogName>
