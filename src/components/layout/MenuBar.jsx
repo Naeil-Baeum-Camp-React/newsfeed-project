@@ -29,7 +29,7 @@ function MenuBar() {
       '전체 게시글': `/${userData.userId}/blog/posts`,
     };
 
-    const postEntries = !isVisit ? { '포스트 작성': `/${userData.userId}/blog/posts/insert` } : {};
+    const postEntries = !isVisit ? { '포스트 작성': `/${userData.userId}/blog/posts/create` } : {};
 
     return new Map([...Object.entries(visitEntries), ...Object.entries(postEntries), ...Object.entries(commonEntries)]);
   }, [paramUserId, userData.userId]);

@@ -28,7 +28,7 @@ function PostDetailPage() {
         if (error) {
           console.error(error.message);
           alert('오류가 발생했습니다.');
-          navigate('/userId/blog/posts');
+          navigate(`/${userId}/blog/posts`);
         }
 
         const dbPost = data.find((dbData) => dbData.id === postId);
@@ -51,7 +51,7 @@ function PostDetailPage() {
     if (error) {
       console.error(error.message);
       alert('게시글 업데이트에 실패했습니다.');
-      navigate('/:userId/blog/posts');
+      navigate(`/${userId}/blog/posts`);
     }
 
     setPost(...data);
@@ -63,48 +63,51 @@ function PostDetailPage() {
   const handleDeletePost = async () => {
     if (window.confirm('정말로 게시글을 삭제하시겠습니까?')) {
       const { error } = await supabase.from('POSTS').delete().eq('id', postId);
-      console.log(error);
       if (error) {
         console.error(error.message);
         alert('게시글 삭제에 실패했습니다.');
-      } else {
-        alert('게시글이 삭제되었습니다.');
         navigate(`/${userId}/blog/posts`);
       }
+      alert('게시글이 삭제되었습니다.');
+      navigate(`/${userId}/blog/posts`);
     }
   };
 
   return (
-    <PostWrapper>
-      <PostHeaderContainer>
-        {isEditing ? (
-          <input placeholder={post.title} onChange={(e) => setTitle(e.target.value)} />
-        ) : (
-          <PostTitle>{post.title}</PostTitle>
-        )}
-        <PostCreatedAt> {post.created_at}</PostCreatedAt>
-        <PostTitleLine />
-      </PostHeaderContainer>
-      <PostContentsContainer>
-        {isEditing ? (
-          <textarea placeholder={post.contents} onChange={(e) => setContent(e.target.value)} />
-        ) : (
-          post.contents
-        )}
-      </PostContentsContainer>
-      <div>
-        <button
-          onClick={() => {
-            isEditing ? handleTogglePost() : setIsEditing(true);
-          }}
-        >
-          수정
-        </button>
-        <button onClick={handleDeletePost}>삭제</button>
-      </div>
-    </PostWrapper>
+    <>
+      <PostWrapper>
+        <PostHeaderContainer>
+          {isEditing ? (
+            <input placeholder={post.title} onChange={(e) => setTitle(e.target.value)} />
+          ) : (
+            <PostTitle>{post.title}</PostTitle>
+          )}
+          <PostCreatedAt> {post.created_at}</PostCreatedAt>
+          <PostTitleLine />
+        </PostHeaderContainer>
+        <PostContentsContainer>
+          {isEditing ? (
+            <textarea placeholder={post.contents} onChange={(e) => setContent(e.target.value)} />
+          ) : (
+            post.contents
+          )}
+        </PostContentsContainer>
+        <div>
+          <button
+            onClick={() => {
+              isEditing ? handleTogglePost() : setIsEditing(true);
+            }}
+          >
+            {isEditing ? '수정 완료' : '수정'}
+          </button>
+          <button onClick={handleDeletePost}>{isEditing ? '수정 취소' : '삭제'}</button>
+        </div>
+      </PostWrapper>
+    </>
   );
 }
+
+export default PostDetailPage;
 
 const PostWrapper = styled.div`
   width: 100%;
@@ -149,5 +152,3 @@ const PostContentsContainer = styled.div`
   background: #ffffff;
   word-wrap: break-word;
 `;
-
-export default PostDetailPage;
