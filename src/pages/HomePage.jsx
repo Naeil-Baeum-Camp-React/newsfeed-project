@@ -7,6 +7,7 @@ function HomePage() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    debugger
     if (userData.isLogedIn){
       navigate(`/${userData.userId}/blog/posts`);
     } else {

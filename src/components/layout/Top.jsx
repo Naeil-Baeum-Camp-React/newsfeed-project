@@ -191,7 +191,7 @@ const Logo = styled.div`
 
 const BlogName = styled.p`
     position: absolute;
-    width: 79px;
+    width: 200px;
     height: 19px;
     left: 37px;
     top: 7px;
