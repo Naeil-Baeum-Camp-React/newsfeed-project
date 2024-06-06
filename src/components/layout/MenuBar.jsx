@@ -7,7 +7,7 @@ function MenuBar() {
   const [activeMenuName, setActiveMenu] = useState('전체 게시글');
   const navigate = useNavigate();
   const { userData } = useUser();
-  const { paramUserId } = useParams();
+  const { userId : paramUserId} = useParams();
 
   useEffect(() => {
     navigate(menuMap.get(activeMenuName));
