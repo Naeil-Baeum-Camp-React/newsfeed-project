@@ -137,6 +137,7 @@ const PostTitle = styled.input`
   color: #000000;
   border: 1px solid #d2dade;
   border-radius: 10px;
+  margin: 0 auto;
 `;
 const PostTitleP = styled.p`
   font-family: 'Inter';
