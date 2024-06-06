@@ -49,7 +49,6 @@ function SetUserData() {
     const formDataObj = Object.fromEntries(formData.entries());
 
     let urlPath;
-    console.log('imgFile :', imgFile);
     if (!imgFile) {
       const errors = reuploadUserDataResolver(formDataObj);
       if (Object.keys(errors).length !== 0) {
@@ -67,6 +66,7 @@ function SetUserData() {
 
       // 이미지 먼저 저장
       let uploadUserResult;
+      console.log('imgUrlForSave :', imgUrlForSave);
       if (imgUrlForSave) {
         // 업데이트면?
         uploadUserResult = await updateAvartar(userData.userId, formDataObj['profile_image']);
@@ -85,6 +85,7 @@ function SetUserData() {
     let data, error;
     if (!imgUrlForSave) {
       // 유저 데이터 업로드
+      console.log('유저 데이터 생성 레츠고!');
       ({ data, error } = await uploadUserDate({
         profile_image: urlPath,
         blog_name: formDataObj['blog_name'],
