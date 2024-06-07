@@ -26,9 +26,9 @@
 <br>
 
 ### 🕰️ 개발 기간
-2024. 5. 31. ~ 2024. 6. 6.(총 8일)
+2024.5.31. ~ 2024.6.6.(총 8일)
  
- <br>
+<br>
 
 ### 👨‍👩‍👧‍👦팀원 구성
 
@@ -39,17 +39,8 @@
 |@whitewise95  | @LeLu815  | @JOYmet33  | @fjw1010  |
 
 <br>
- 
-### ⚙️ 개발 환경
-- Github
-- Slack
-- Zep
-- Figma
-- 
-<br>
 
 ### 🍳 기술 스택
-
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 <br>
