@@ -53,8 +53,8 @@ const UserBox = styled.div`
 `;
 
 const UserProfile = styled.img`
-  width: 150px;
-  height: 150px;
+  width: 220px;
+  height: 220px;
   background: #d9d9d9;
   border-radius: 5px;
   margin-bottom: 5px;
