@@ -14,12 +14,11 @@ import {
 } from '../../utils/superBaseFunc';
 import { reuploadUserDataResolver, uploadUserDataResolver } from '../../validation/userSchema';
 import { StButtonBox, StLoginContainer, StTitle, SterrorUl } from '../Login/LoginStyle';
+import { useModal } from '../../contexts/popup.context';
 
-// const uploadFileDownloadUrlFunc = async(userId, imageFile) => {
-//   const uploadUserResult = await uploadAvartar(userData.userId, formDataObj['profile_image']);
-// }
 function SetUserData() {
   const navigate = useNavigate();
+  const { openModal } = useModal();
   const { userData } = useUser();
   const imgRef = useRef(null);
   const [imgFile, setImgFile] = useState(null);
@@ -109,6 +108,18 @@ function SetUserData() {
       navigate('/');
     }
   };
+  // 에러 발생시 팝업 생성
+  useEffect(() => {
+    if (uploadError && !createError) {
+      openModal('생성 오류', '다시 시도해주세요.');
+    }
+    if (!uploadError && createError) {
+      openModal('업로드 오류', '다시 시도해주세요.');
+    }
+    if (uploadError && createError) {
+      openModal('오류 발생', '처리중 오류가 발생했습니다.');
+    }
+  }, []);
 
   // 로그인이 되어있는 경우만
   useEffect(() => {
