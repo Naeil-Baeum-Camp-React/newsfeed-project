@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import defaultImgage from '../../asset/default-profile.jpg';
 import settingsIcon from '../../asset/gear.svg';
 import github from '../../asset/github.svg';
 import supabase from '../../config/supabase';
@@ -38,7 +39,7 @@ function Profile() {
         </ProfileBox>
       </Link>
       <Margin></Margin>
-      <ProfileImage src={userImage} />
+      <ProfileImage src={userImage ? userImage : defaultImgage} />
       <ProfileNickName>{nickName}</ProfileNickName>
       <ProfileInformation $isExist={userInformation}>
         {userInformation ? userInformation : '소개글을 작성해주세요.'}
