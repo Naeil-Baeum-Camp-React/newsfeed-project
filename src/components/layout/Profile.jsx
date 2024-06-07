@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import supabase from '../../config/supabase';
@@ -6,15 +6,12 @@ import { useUser } from '../../contexts/login.context';
 
 function Profile() {
   const { userData } = useUser();
-  const fileInput = useRef();
   const navigate = useNavigate();
   const [userImage, setUserImage] = useState('');
   const [nickName, setNickName] = useState('');
   const [userInformation, setUserInformation] = useState('');
   const [blogNameModify, setBlogNameModify] = useState('');
   const [gitHubUrlLinks, setGitHubUrlLinks] = useState('');
-  const [saveBtn, setSaveBtn] = useState('');
-  const [cancelBtn, setCancelBtn] = useState('');
 
   useEffect(() => {
     supabase
@@ -33,10 +30,12 @@ function Profile() {
   }, []);
   return (
     <Wrapper>
-      <ProfileSettings></ProfileSettings>
+      <BlogTitle>{blogNameModify}</BlogTitle>
+      <ProfileSettings onClick={() => navigate('/ProfileDetailPage')}></ProfileSettings>
       <ProfileImage src={userImage} />
       <ProfileNickName>{nickName}</ProfileNickName>
-      <ProfileBasics>{userInformation}</ProfileBasics>
+      <ProfileInformation>{userInformation}</ProfileInformation>
+      <GigHubLink>{gitHubUrlLinks}</GigHubLink>
     </Wrapper>
   );
 }
@@ -51,6 +50,23 @@ const Wrapper = styled.main`
   background: #ffffff;
   box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
+`;
+const BlogTitle = styled.h1`
+  /* 블로그 제목 */
+
+  position: absolute;
+  width: 79px;
+  height: 19px;
+  left: 97px;
+  top: 50px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+
+  color: #000000;
 `;
 
 const ProfileSettings = styled.img`
@@ -77,6 +93,9 @@ const ProfileImage = styled.img`
 
   border: 2px solid #e0e0e0;
   border-radius: 10px;
+
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
 `;
 
 const ProfileNickName = styled.div`
@@ -93,18 +112,35 @@ const ProfileNickName = styled.div`
   border: 2px solid #e0e0e0;
   border-radius: 10px;
 `;
-const ProfileBasics = styled.div`
+const ProfileInformation = styled.div`
   /* 프로필 기본사항 */
 
   box-sizing: border-box;
 
   position: absolute;
   width: 140px;
-  height: 168px;
+  height: 242px;
   left: 20px;
   top: 224px;
 
   border: 2px solid #e0e0e0;
   border-radius: 10px;
 `;
+
+const GigHubLink = styled.div`
+  /* 블로그명 수정 */
+
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 74px;
+  height: 54px;
+  left: 53px;
+  top: 491px;
+
+  background: #ffffff;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+`;
+
 export default Profile;
