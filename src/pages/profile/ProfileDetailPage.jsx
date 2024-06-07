@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import supabase from '../../config/supabase';
 import { useUser } from '../../contexts/login.context';
+import { useModal } from '../../contexts/popup.context.jsx';
 import { updateAvartar } from '../../utils/superBaseFunc.jsx';
 
 function ProfileDetailPage() {
+  const { openModal } = useModal();
   const { userData } = useUser();
   const fileInput = useRef();
 
@@ -49,7 +51,7 @@ function ProfileDetailPage() {
           alert('저장 되었습니다!');
           navigate(`/${userData.userId}/blog/posts`);
         } else {
-          alert('저장에 실패 했습니다.');
+          openModal('저장 실패', '저장에 실패했습니다.');
         }
       });
   };
@@ -68,7 +70,7 @@ function ProfileDetailPage() {
         </Logo>
         <Border></Border>
         <Image src={userImage} onClick={() => fileInput.current.click()}></Image>
-        <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} hidden/>
+        <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} hidden />
         <NickName value={nickName} onChange={(e) => setNickName(e.target.value)}></NickName>
         <ProfileInformation
           value={userInformation}

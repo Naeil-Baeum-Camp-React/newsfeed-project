@@ -1,7 +1,8 @@
-import supabase from '../../config/supabase.js';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import supabase from '../../config/supabase.js';
+import { useModal } from '../../contexts/popup.context.jsx';
 const PostCreatingPage = () => {
   const [post, setPost] = useState({
     id: '',
@@ -12,17 +13,18 @@ const PostCreatingPage = () => {
   const [content, setContent] = useState('');
   const { userId } = useParams();
   const navigate = useNavigate();
+  const { openModal } = useModal();
 
   const handleCreatePost = async (e) => {
     e.preventDefault();
     const { data, error } = await supabase.from('POSTS').insert({ title, contents: content }).select().throwOnError();
     if (error) {
       console.error(error.message);
-      alert('게시글 생성에 실패했습니다.');
+      openModal('게시글 실패', '게시글 생성에 실패했습니다.');
       navigate(`/${userId}/blog/posts`);
     } else {
       setPost(...data);
-      alert('게시글이 생성되었습니다.');
+      openModal('게시글 성공', '게시글이 생성되었습니다.');
       navigate(`/${userId}/blog/posts`);
     }
   };
