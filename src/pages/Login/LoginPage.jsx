@@ -110,6 +110,7 @@ const StInput = styled.input`
   box-sizing: border-box;
   gap: 10px;
   padding: 0 10px;
+  border:3px solid #ededed;
   border-radius: 10px;
   font-size: 20px;
 `;
@@ -120,7 +121,13 @@ const StJoinDiv = styled.div`
   justify-content: center;
   gap: 8px;
   a {
-    margin-top: 10px;
-    font-weight: 500;
-  }
+      color:#000;
+      margin-top: 10px;
+      font-weight: 500;
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset : 5px;
+        color:#3AA6B9;
+      }
+    }
 `;

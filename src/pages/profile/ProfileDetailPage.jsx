@@ -16,7 +16,6 @@ function ProfileDetailPage() {
   const [blogNameModify, setBlogNameModify] = useState('');
   const [gitHubUrlLinks, setGitHubUrlLinks] = useState('');
 
-
   useEffect(() => {
     supabase
       .from('USERS')

@@ -153,6 +153,7 @@ const StInput = styled.input`
   padding: 0 10px;
   border-radius: 10px;
   font-size: 20px;
+  border: 3px solid #ededed;
 `;
 const StJoinDiv = styled.div`
   display: flex;
@@ -162,7 +163,14 @@ const StJoinDiv = styled.div`
   margin-top: 35px;
   gap: 8px;
   a {
+    color:#000;
     margin-top: 10px;
     font-weight: 500;
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset : 5px;
+      color:#3AA6B9;
+    }
   }
+  
 `;

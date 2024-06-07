@@ -168,9 +168,9 @@ const LeftContainer = styled.div`
 const LogoText = styled.p`
     position: absolute;
     width: 14px;
-    height: 17px;
+    height: 14px;
     left: 10px;
-    top: 5px;
+    top: 3px;
 
     font-family: 'Istok Web';
     font-style: normal;
@@ -203,6 +203,7 @@ const BlogName = styled.p`
     line-height: 19px;
 
     color: #000000;
+    
 `;
 
 const RightContainer = styled.div`
@@ -230,8 +231,10 @@ const LogoutDiv = styled.div`
     font-weight: 100;
     font-size: 16px;
     line-height: 19px;
-
+    cursor: pointer;
     color: #3a3e41;
+
+    background:red;
 `;
 
 const FollowButton = styled.button`
