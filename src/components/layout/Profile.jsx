@@ -30,8 +30,8 @@ function Profile() {
   }, []);
   return (
     <Wrapper>
-      <BlogTitle>{blogNameModify}</BlogTitle>
-      <ProfileSettings onClick={() => navigate('/ProfileDetailPage')}></ProfileSettings>
+      {/* <BlogTitle>{blogNameModify}</BlogTitle> */}
+      <ProfileSettings onClick={() => navigate("/ProfileDetailPage")}></ProfileSettings>
       <ProfileImage src={userImage} />
       <ProfileNickName>{nickName}</ProfileNickName>
       <ProfileInformation>{userInformation}</ProfileInformation>
@@ -50,24 +50,24 @@ const Wrapper = styled.main`
   background: #ffffff;
   box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-`;
-const BlogTitle = styled.h1`
-  /* 블로그 제목 */
+`
+// const BlogTitle = styled.h1`
+//   /* 블로그 제목 */
 
-  position: absolute;
-  width: 79px;
-  height: 19px;
-  left: 97px;
-  top: 50px;
+//   position: absolute;
+//   width: 79px;
+//   height: 19px;
+//   left: 97px;
+//   top: 50px;
 
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 19px;
+//   font-family: 'Inter';
+//   font-style: normal;
+//   font-weight: 700;
+//   font-size: 16px;
+//   line-height: 19px;
 
-  color: #000000;
-`;
+//   color: #000000;
+// `
 
 const ProfileSettings = styled.img`
   /* 설정 img */
