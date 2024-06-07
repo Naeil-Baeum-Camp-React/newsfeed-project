@@ -40,4 +40,7 @@ const AuthLogoHeader = styled.div`
   align-items: center;
   padding: 15px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  img {
+    cursor: pointer;
+  }
 `;

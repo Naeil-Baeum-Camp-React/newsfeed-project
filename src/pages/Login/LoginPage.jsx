@@ -5,7 +5,7 @@ import supabase from '../../config/supabase';
 import styled from 'styled-components';
 import { useUser } from '../../contexts/login.context';
 import { loginResolver } from '../../validation/userSchema';
-import { StJoinButton, StLoginContainer, StTitle } from './LoginStyle';
+import { StJoinButton, StLoginContainer, StTitle, SterrorUl } from './LoginStyle';
 
 function LoginPage() {
   const [messsages, setMessages] = useState(null);
@@ -47,18 +47,22 @@ function LoginPage() {
         <StInputSection>
           <StInputDiv>
             <label htmlFor="email">이메일</label>
+            <SterrorUl>
+              {messsages &&
+                messsages['email'] &&
+                messsages['email'].map((messsage) => <li key={messsage}>{messsage}</li>)}
+            </SterrorUl>
             <StInput id="email" name="email" type="email" />
-            {messsages &&
-              messsages['email'] &&
-              messsages['email'].map((messsage) => <li key={messsage}>{messsage}</li>)}
           </StInputDiv>
 
           <StInputDiv>
             <label htmlFor="password">비밀번호</label>
+            <SterrorUl>
+              {messsages &&
+                messsages['password'] &&
+                messsages['password'].map((messsage) => <li key={messsage}>{messsage}</li>)}
+            </SterrorUl>
             <StInput id="password" name="password" type="password" />
-            {messsages &&
-              messsages['password'] &&
-              messsages['password'].map((messsage) => <li key={messsage}>{messsage}</li>)}
           </StInputDiv>
         </StInputSection>
 
