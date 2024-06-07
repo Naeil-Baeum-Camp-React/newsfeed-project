@@ -18,27 +18,27 @@ function Layout() {
 }
 
 const LayoutWrapper = styled.div`
-    position: absolute;
-    width: 1100px;
-    height: 700px;
-    left: calc(50% - 1100px / 2 - 0.5px);
-    top: 5px;
+    /* Group 6 */
 
-    //background: #FFF6F8;
-    background: #f8f1f3;
-    border-radius: 10px;
+  position: absolute;
+  width: 1200px;
+  height: 800px;
+
+
 `;
 
 const Contents = styled.div`
-    position: absolute;
-    width: 800px;
-    height: 570px;
-    left: 220px;
-    top: 110px;
+    /* Rectangle 279 */
 
-    background: #FFFFFF;
-    box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 1140px;
+  height: 750px;
+
+  border: 1px dashed #FFFFFF;
+  border-radius: 20px;
+
     overflow: auto; /* 스크롤 추가 */
 `;
 export default Layout;

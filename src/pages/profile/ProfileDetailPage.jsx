@@ -23,7 +23,6 @@ function ProfileDetailPage() {
       .select('*')
       .eq('id', userData.userId)
       .then(response => {
-        debugger
         if (!response.error) {
           setUserImage(response.data[0].profile_image);
           setNickName(response.data[0].nickname);
@@ -53,6 +52,7 @@ function ProfileDetailPage() {
       .then(response => {
         if (!response.error) {
           alert('저장 되었습니다!');
+          navigate(`/${userData.userId}/blog/posts`)
         } else {
           alert('저장에 실패 했습니다.');
         }
@@ -74,7 +74,7 @@ function ProfileDetailPage() {
         <Image src={userImage} onClick={() => fileInput.current.click()}></Image>
         <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} />
         <NickName value={nickName} onChange={(e) => setNickName(e.target.value)}></NickName>
-        <ProfileBasics value={userInformation} onChange={(e) => setUserInformation(e.target.value)}></ProfileBasics>
+        <ProfileInformation value={userInformation} onChange={(e) => setUserInformation(e.target.value)}></ProfileInformation>
         <BlogName value={blogNameModify} onChange={(e) => setBlogNameModify(e.target.value)}></BlogName>
         <GigHubUrlLink value={gitHubUrlLinks} onChange={(e) => setGitHubUrlLinks(e.target.value)}></GigHubUrlLink>
         <SaveButton onClick={handlerSaveBtn}>저장</SaveButton>
@@ -176,8 +176,8 @@ const NickName = styled.input`
     border: 2px solid #E0E0E0;
     border-radius: 10px;
 
-`;
-const ProfileBasics = styled.textarea`
+`
+const ProfileInformation = styled.textarea`
     /* 프로필 기본사항 */
 
     box-sizing: border-box;

@@ -112,7 +112,7 @@ const MenuName = styled.p`
 
     font-style: normal;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 29px;
     color: #3AA6B9;
 `;
