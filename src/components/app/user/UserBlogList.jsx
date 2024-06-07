@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import defaultImage from '../../../asset/default-profile.jpg';
+
 function UserBlogList({ userBlogList }) {
   const navigate = useNavigate();
 
@@ -13,7 +15,7 @@ function UserBlogList({ userBlogList }) {
       {userBlogList.map((follow) => {
         return (
           <UserBox key={follow.id} onClick={() => moveTargetUserBlog(follow.id)}>
-            <UserProfile src={follow.profileImage}></UserProfile>
+            <UserProfile src={follow.profileImage ? follow.profileImage : defaultImage}></UserProfile>
             <UserBlogName>{follow.blogName}</UserBlogName>
             <FollowerCount>팔로워 :{follow.followersCount}</FollowerCount>
           </UserBox>
@@ -56,6 +58,7 @@ const UserProfile = styled.img`
   background: #d9d9d9;
   border-radius: 5px;
   margin-bottom: 5px;
+  object-fit: cover;
 `;
 
 const UserBlogName = styled.div`
