@@ -1,13 +1,13 @@
-import styled from 'styled-components';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import { useUser } from '../../contexts/login.context.jsx';
 
 function MenuBar() {
   const [activeMenuName, setActiveMenu] = useState('전체 게시글');
   const navigate = useNavigate();
   const { userData } = useUser();
-  const { userId : paramUserId} = useParams();
+  const { userId: paramUserId } = useParams();
 
   useEffect(() => {
     navigate(menuMap.get(activeMenuName));
@@ -21,7 +21,7 @@ function MenuBar() {
     const isVisit = paramUserId === userData.userId;
 
     const commonEntries = {
-      '내 팔로잉 리스트': `/${userData.userId}/following`,
+      '팔로잉 리스트': `/${userData.userId}/following`,
       '블로그 목록': `/${userData.userId}/blogs`,
     };
 
@@ -29,7 +29,7 @@ function MenuBar() {
       '전체 게시글': `/${userData.userId}/blog/posts`,
     };
 
-    const postEntries = isVisit ?  { '게시글 작성': `/${userData.userId}/blog/posts/create` } : {} ;
+    const postEntries = isVisit ? { '게시글 작성': `/${userData.userId}/blog/posts/create` } : {};
 
     return new Map([...Object.entries(visitEntries), ...Object.entries(postEntries), ...Object.entries(commonEntries)]);
   }, [paramUserId, userData.userId]);
@@ -85,18 +85,21 @@ const Menu = styled.div`
 
 const MenuName = styled.p`
   /* 전체 게시글 */
-
+  font-weight: 600;
   width: 100%;
   height: 10px;
   margin-top: 7px;
 
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 100;
   font-size: 10px;
-  line-height: 12px;
   text-align: center;
   color: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
 `;
 
 export default MenuBar;

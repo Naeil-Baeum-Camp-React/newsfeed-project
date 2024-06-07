@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
 
 function Search({ search }) {
   const [keyword, seyKeyword] = useState('');
@@ -27,14 +27,15 @@ function Search({ search }) {
 
 const SearchBar = styled.input`
   box-sizing: border-box;
-  width: 205px;
+  padding: 0 20px;
+  width: 400px;
   height: 35px;
   background: #ffffff;
   border: 2px solid #e0e0e0;
   border-radius: 20px;
 
   &:focus {
-    border-color: royalblue; /* Change this to the desired color */
+    border-color: #ff6077; /* Change this to the desired color */
     outline: none;
   }
 `;
