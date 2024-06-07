@@ -97,7 +97,9 @@ function Top() {
         <LeftContainer>
           <Follower>팔로워 : {followCount}</Follower>
           {userData.userId !== userId ? (
-            <FollowButton onClick={handleFollow}>{isFollowing ? '언팔로우' : '팔로우'}</FollowButton>
+            <FollowButton $follow={isFollowing} onClick={handleFollow}>
+              {isFollowing ? '언팔로우' : '팔로우'}
+            </FollowButton>
           ) : (
             ''
           )}
@@ -245,13 +247,15 @@ const LogoutDiv = styled.div`
 const FollowButton = styled.button`
   position: absolute;
   box-sizing: border-box;
-  width: 70px;
-  height: 20px;
-  left: 31px;
-  top: 28px;
-  background: #ffffff;
+  width: 77px;
+  height: 25px;
+  left: 32px;
+  top: 25px;
   border: 2px solid #e0e0e0;
-  border-radius: 20px;
+  background: ${(props) => (props.$follow ? '#FF6077' : '#ffffff')};
+  border-color: ${(props) => (props.$follow ? '#FF6077' : '#e0e0e0')};
+  color: ${(props) => (props.$follow ? '#ffffff' : '#848484')};
+  border-radius: 10px;
 
   &:hover {
     cursor: pointer;
