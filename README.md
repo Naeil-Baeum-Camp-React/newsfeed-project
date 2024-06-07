@@ -46,6 +46,7 @@
 <br>
 
 ## 폴더 구조
+```
 📦src
  ┣ 📂asset
  ┃ ┣ 📜default-profile.jpg
@@ -114,3 +115,4 @@
  ┣ 📜App.css
  ┣ 📜App.jsx
  ┗ 📜main.jsx
+```
