@@ -65,19 +65,30 @@ function ProfileDetailPage() {
   return (
     <>
       <Wrapper>
-        <Logo>
-          <Text>BLAR</Text>
-        </Logo>
+        <Text>BLAR</Text>
         <Border></Border>
         <Image src={userImage} onClick={() => fileInput.current.click()}></Image>
         <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} hidden />
-        <NickName value={nickName} onChange={(e) => setNickName(e.target.value)}></NickName>
+        <NickName
+          placeholder="닉네임을 입력해 주세요"
+          value={nickName}
+          onChange={(e) => setNickName(e.target.value)}
+        ></NickName>
         <ProfileInformation
+          placeholder="소개말을 입력해 주세요"
           value={userInformation}
           onChange={(e) => setUserInformation(e.target.value)}
         ></ProfileInformation>
-        <BlogName value={blogNameModify} onChange={(e) => setBlogNameModify(e.target.value)}></BlogName>
-        <GigHubUrlLink value={gitHubUrlLinks} onChange={(e) => setGitHubUrlLinks(e.target.value)}></GigHubUrlLink>
+        <BlogName
+          placeholder="블로그 이름을 작성해 주세요"
+          value={blogNameModify}
+          onChange={(e) => setBlogNameModify(e.target.value)}
+        ></BlogName>
+        <GigHubUrlLink
+          placeholder="url을 입력해 주세요"
+          value={gitHubUrlLinks}
+          onChange={(e) => setGitHubUrlLinks(e.target.value)}
+        ></GigHubUrlLink>
         <SaveButton onClick={handlerSaveBtn}>저장</SaveButton>
         <CancelButton onClick={() => navigate(`/${userData.userId}/blog/posts`)}>취소</CancelButton>
       </Wrapper>
@@ -98,21 +109,7 @@ const Wrapper = styled.div`
   box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `;
-const Logo = styled.h1`
-  /* Frame 5 */
 
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 70px;
-  height: 30px;
-  left: calc(50% - 70px / 2 - 2px);
-  top: 23px;
-
-  background: #ffffff;
-  border: 2px solid #3a3e41;
-  border-radius: 30px;
-`;
 const Text = styled.p`
   /* logo */
 
@@ -169,6 +166,9 @@ const NickName = styled.input`
   height: 40px;
   left: 449px;
   top: 255px;
+
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
 `;
 const ProfileInformation = styled.textarea`
   /* 프로필 기본사항 */
