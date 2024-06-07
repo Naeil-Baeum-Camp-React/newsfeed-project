@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import supabase from '../../config/supabase';
 import { useUser } from '../../contexts/login.context';
+import settingsIcon from "../../asset/settings.png"
 
 function Profile() {
   const { userData } = useUser();
@@ -31,7 +32,7 @@ function Profile() {
   return (
     <Wrapper>
       {/* <BlogTitle>{blogNameModify}</BlogTitle> */}
-      <ProfileSettings onClick={() => navigate("/ProfileDetailPage")}></ProfileSettings>
+      <ProfileSettings src={settingsIcon} onClick={() => navigate("/ProfileDetailPage")}></ProfileSettings>
       <ProfileImage src={userImage} />
       <ProfileNickName>{nickName}</ProfileNickName>
       <ProfileInformation>{userInformation}</ProfileInformation>
@@ -51,23 +52,6 @@ const Wrapper = styled.main`
   box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 `
-// const BlogTitle = styled.h1`
-//   /* 블로그 제목 */
-
-//   position: absolute;
-//   width: 79px;
-//   height: 19px;
-//   left: 97px;
-//   top: 50px;
-
-//   font-family: 'Inter';
-//   font-style: normal;
-//   font-weight: 700;
-//   font-size: 16px;
-//   line-height: 19px;
-
-//   color: #000000;
-// `
 
 const ProfileSettings = styled.img`
   /* 설정 img */
@@ -80,6 +64,7 @@ const ProfileSettings = styled.img`
   border-radius: 3px;
   border: none;
 `;
+
 const ProfileImage = styled.img`
   /* 이미지 */
 
