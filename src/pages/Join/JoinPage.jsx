@@ -48,7 +48,6 @@ function JoinPage() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formDataObj = Object.fromEntries(formData.entries());
-    console.log(formDataObj);
 
     const errors = joinResolver(formDataObj);
     if (Object.keys(errors).length !== 0) {
@@ -70,7 +69,6 @@ function JoinPage() {
       });
       return navigate('/join/info');
     } else {
-      console.log('여기');
       dispatch({
         type: CREATE_FAIL,
       });

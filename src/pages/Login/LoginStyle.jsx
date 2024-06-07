@@ -40,6 +40,7 @@ export const StJoinButton = styled(StButtonBox)`
   cursor: pointer;
   color: white;
   background-color: #ff6077;
+  border: none;
   &:hover {
     background: #ff3553;
   }
