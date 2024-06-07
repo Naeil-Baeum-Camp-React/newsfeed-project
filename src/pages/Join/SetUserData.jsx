@@ -229,6 +229,7 @@ const StInput = styled.input`
   padding: 0 10px;
   border-radius: 10px;
   font-size: 20px;
+  border: none;
 `;
 export const StJoinButton = styled(StButtonBox)`
   cursor: pointer;
