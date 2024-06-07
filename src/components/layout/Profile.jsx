@@ -14,7 +14,6 @@ function Profile() {
   const [userInformation, setUserInformation] = useState('');
   const [blogNameModify, setBlogNameModify] = useState('');
   const [gitHubUrlLinks, setGitHubUrlLinks] = useState('');
-
   useEffect(() => {
     supabase
       .from('USERS')
@@ -32,8 +31,7 @@ function Profile() {
   }, [userData.userId]);
   return (
     <Wrapper>
-      {/* <BlogTitle>{blogNameModify}</BlogTitle> */}
-      <Link to="'/ProfileDetailPage'">
+      <Link to="/ProfileDetailPage">
         <ProfileBox>
           <ProfileSettings src={settingsIcon} />
           <span>프로필 수정하기</span>
@@ -45,7 +43,7 @@ function Profile() {
       <ProfileInformation $isExist={userInformation}>
         {userInformation ? userInformation : '소개글을 작성해주세요.'}
       </ProfileInformation>
-      <GigHubLink disabled={gitHubUrlLinks} href={gitHubUrlLinks} target="_blank">
+      <GigHubLink $github={gitHubUrlLinks} disabled={gitHubUrlLinks} href={gitHubUrlLinks} target="_blank">
         <GigHubImg src={github} />
         깃허브 링크 &rarr;
       </GigHubLink>
@@ -146,6 +144,8 @@ const GigHubLink = styled.a`
   background: black;
   border: none;
   border-radius: 10px;
+  background-color: ${(props) => (props.$github ? 'black' : '#838383')};
+  cursor: ${(props) => (props.$github ? 'pointer' : 'not-allowed')};
 `;
 const Margin = styled.div`
   height: 25px;

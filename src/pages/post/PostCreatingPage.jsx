@@ -19,7 +19,6 @@ const PostCreatingPage = () => {
     e.preventDefault();
     const { data, error } = await supabase.from('POSTS').insert({ title, contents: content }).select().throwOnError();
     if (error) {
-      console.error(error.message);
       openModal('게시글 실패', '게시글 생성에 실패했습니다.');
       navigate(`/${userId}/blog/posts`);
     } else {
