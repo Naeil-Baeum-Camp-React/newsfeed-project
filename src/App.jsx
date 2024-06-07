@@ -7,7 +7,7 @@ import Router from './shared/Router.jsx';
 
 function App() {
   const [session, setSession] = useState(null);
-  const { login, accessUpdate } = useUser();
+  const { login, accessUpdate, userData } = useUser();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -27,7 +27,7 @@ function App() {
     });
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [userData]);
   return (
     <AppWrapper>
       <DottedLine>
