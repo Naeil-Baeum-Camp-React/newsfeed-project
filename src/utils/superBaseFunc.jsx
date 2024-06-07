@@ -8,7 +8,6 @@ export const getAvartarUrl = (avartarName) => {
 };
 // 유저 이미지 파일 업로드
 export const uploadAvartar = async (name, path) => {
-  console.log('name :', name, 'path :', path);
   const uploadUserResult = await supabase.storage.from('avatars').upload(name, path);
   return uploadUserResult;
 };
@@ -53,6 +52,6 @@ export function blobToFile(theBlob, fileName) {
     const newFile = new File([theBlob], fileName, { lastModified: new Date().getTime(), type: 'image/png' });
     return newFile;
   } catch (e) {
-    console.log(e);
+    return e;
   }
 }

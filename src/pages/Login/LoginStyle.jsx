@@ -20,7 +20,7 @@ export const StTitle = styled.h1`
   color: #3a3e41;
 `;
 
-export const StButtonBox = styled.div`
+export const StButtonBox = styled.button`
   width: 450px;
   height: 55px;
   display: flex;
@@ -40,10 +40,23 @@ export const StJoinButton = styled(StButtonBox)`
   cursor: pointer;
   color: white;
   background-color: #ff6077;
+  border: none;
   &:hover {
     background: #ff3553;
   }
   img {
     filter: invert(100%);
+  }
+`;
+
+export const SterrorUl = styled.ul`
+  display: flex;
+  gap: 6px;
+  li {
+    font-size: 10px;
+    font-weight: 700;
+    color: #ff4561;
+    list-style-type: none;
+    list-style: none;
   }
 `;

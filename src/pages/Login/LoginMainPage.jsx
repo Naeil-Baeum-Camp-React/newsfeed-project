@@ -72,6 +72,7 @@ const StEmailBox = styled(StButtonBox)`
   cursor: pointer;
   color: white;
   background: #95a5a6;
+  border: none;
   img {
     filter: invert(100%);
   }
@@ -83,6 +84,7 @@ const StGithubBox = styled(StButtonBox)`
   cursor: pointer;
   color: white;
   background-color: black;
+  border: none;
   &:hover {
     background: #363636;
   }
