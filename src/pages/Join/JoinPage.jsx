@@ -1,9 +1,10 @@
 import { produce } from 'immer';
 import { useEffect, useReducer } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import styled from 'styled-components';
+
 import supabase from '../../config/supabase';
+import { useModal } from '../../contexts/popup.context';
 import { useUser } from '../../contexts/login.context';
 import { joinResolver } from '../../validation/userSchema';
 import { StJoinButton, StLoginContainer, StTitle, SterrorUl } from '../Login/LoginStyle';
@@ -36,6 +37,7 @@ function submitResultReducer(state, action) {
 }
 
 function JoinPage() {
+  const { openModal } = useModal();
   const [submitStatus, dispatch] = useReducer(submitResultReducer, {
     message: null,
     email: null,
@@ -75,6 +77,11 @@ function JoinPage() {
     }
   };
 
+  useEffect(() => {
+    if (submitStatus.message) {
+      openModal('가입 정보 오류', submitStatus.message);
+    }
+  }, [submitStatus.message]);
   useEffect(() => {
     if (userData.isLogedIn) {
       return navigate('/');
