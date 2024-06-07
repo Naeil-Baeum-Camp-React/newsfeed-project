@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import settingsIcon from '../../asset/gear.svg';
+import github from '../../asset/github.svg';
 import supabase from '../../config/supabase';
 import { useUser } from '../../contexts/login.context';
-import settingsIcon from "../../asset/settings.png"
 
 function Profile() {
   const { userData } = useUser();
@@ -32,17 +33,31 @@ function Profile() {
   return (
     <Wrapper>
       {/* <BlogTitle>{blogNameModify}</BlogTitle> */}
-      <ProfileSettings src={settingsIcon} onClick={() => navigate("/ProfileDetailPage")}></ProfileSettings>
+      <Link to="'/ProfileDetailPage'">
+        <ProfileBox>
+          <ProfileSettings src={settingsIcon} />
+          <span>프로필 수정하기</span>
+        </ProfileBox>
+      </Link>
+      <Margin></Margin>
       <ProfileImage src={userImage} />
       <ProfileNickName>{nickName}</ProfileNickName>
-      <ProfileInformation>{userInformation}</ProfileInformation>
-      <GigHubLink>{gitHubUrlLinks}</GigHubLink>
+      <ProfileInformation $isExist={userInformation}>
+        {userInformation ? userInformation : '소개글을 작성해주세요.'}
+      </ProfileInformation>
+      <GigHubLink disabled={gitHubUrlLinks} href={gitHubUrlLinks} target="_blank">
+        <GigHubImg src={github} />
+        깃허브 링크 &rarr;
+      </GigHubLink>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.main`
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 180px;
   height: 570px;
   left: 26px;
@@ -51,81 +66,88 @@ const Wrapper = styled.main`
   background: #ffffff;
   box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-`
-
+`;
+const ProfileBox = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  margin-top: 10px;
+  span {
+    color: #646464;
+  }
+`;
 const ProfileSettings = styled.img`
   /* 설정 img */
-
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  left: 153px;
-  top: 8px;
-  border-radius: 3px;
+  width: 18px;
+  height: 18px;
   border: none;
+  margin-bottom: 4px;
+  filter: invert(70%);
 `;
 
 const ProfileImage = styled.img`
   /* 이미지 */
+  width: 160px;
+  height: 160px;
 
-  box-sizing: border-box;
-
-  position: absolute;
-  width: 140px;
-  height: 138px;
-  left: 20px;
-  top: 26px;
-
+  margin-top: 50px;
   border: 2px solid #e0e0e0;
-  border-radius: 10px;
-
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
+  border-radius: 5px;
+  margin: 0 auto;
+  object-fit: cover;
 `;
 
 const ProfileNickName = styled.div`
   /* 닉네임 */
-
+  width: 160px;
+  padding: 6px 0 3px 0;
+  justify-content: center;
+  display: flex;
+  align-items: center;
   box-sizing: border-box;
 
-  position: absolute;
-  width: 140px;
-  height: 40px;
-  left: 20px;
-  top: 174px;
-
+  margin-top: 15px;
   border: 2px solid #e0e0e0;
   border-radius: 10px;
 `;
 const ProfileInformation = styled.div`
   /* 프로필 기본사항 */
-
+  color: ${(props) => (props.$isExist ? 'black' : '#aaaaaa')};
+  width: 160px;
+  height: 200px;
+  margin-top: 15px;
   box-sizing: border-box;
 
-  position: absolute;
-  width: 140px;
-  height: 242px;
-  left: 20px;
-  top: 224px;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: 2px solid #e0e0e0;
   border-radius: 10px;
 `;
 
-const GigHubLink = styled.div`
-  /* 블로그명 수정 */
-
+const GigHubImg = styled.img`
+  width: 20px;
+  height: 20px;
+  filter: invert(100%);
+`;
+const GigHubLink = styled.a`
+  cursor: pointer;
+  width: 160px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
   box-sizing: border-box;
-
-  position: absolute;
-  width: 74px;
-  height: 54px;
-  left: 53px;
-  top: 491px;
-
-  background: #ffffff;
-  border: 2px solid #e0e0e0;
+  color: white;
+  background: black;
+  border: none;
   border-radius: 10px;
 `;
-
+const Margin = styled.div`
+  height: 25px;
+`;
 export default Profile;
