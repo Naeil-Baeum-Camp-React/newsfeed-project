@@ -28,6 +28,8 @@ function SetUserData() {
   const [createError, setCreateError] = useState(null); // 유저 객체 데이터 생성 오류
   const [prevUserData, setPrevUserData] = useState(null);
 
+  console.log('userData :', userData);
+
   const handleUploadAvartar = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -85,14 +87,12 @@ function SetUserData() {
     let data, error;
     if (!imgUrlForSave) {
       // 유저 데이터 업로드
-      console.log('유저 데이터 생성 레츠고!');
       ({ data, error } = await uploadUserDate({
         profile_image: urlPath,
         blog_name: formDataObj['blog_name'],
         nickname: formDataObj['nickname'],
       }));
     } else {
-      console.log('업데이트 레츠고!');
       // 유저 데이터 업데이트
       error = await updateUserDate({
         profile_image: urlPath,
@@ -107,10 +107,8 @@ function SetUserData() {
     }
 
     // 변경 완료.
-    if (imgUrlForSave) {
-      if (data) {
-        navigate('/');
-      }
+    if (data) {
+      navigate('/');
     }
   };
 
