@@ -13,6 +13,7 @@ import {
   uploadUserDate,
 } from '../../utils/superBaseFunc';
 import { reuploadUserDataResolver, uploadUserDataResolver } from '../../validation/userSchema';
+import { StButtonBox, StLoginContainer, StTitle, SterrorUl } from '../Login/LoginStyle';
 
 // const uploadFileDownloadUrlFunc = async(userId, imageFile) => {
 //   const uploadUserResult = await uploadAvartar(userData.userId, formDataObj['profile_image']);
@@ -27,8 +28,6 @@ function SetUserData() {
   const [uploadError, setUploadError] = useState(null);
   const [createError, setCreateError] = useState(null); // 유저 객체 데이터 생성 오류
   const [prevUserData, setPrevUserData] = useState(null);
-
-  console.log('userData :', userData);
 
   const handleUploadAvartar = (e) => {
     const file = e.target.files[0];
@@ -68,7 +67,6 @@ function SetUserData() {
 
       // 이미지 먼저 저장
       let uploadUserResult;
-      console.log('imgUrlForSave :', imgUrlForSave);
       if (imgUrlForSave) {
         // 업데이트면?
         uploadUserResult = await updateAvartar(userData.userId, formDataObj['profile_image']);
@@ -134,24 +132,46 @@ function SetUserData() {
     }
   }, [userData]);
   return (
-    <form onSubmit={handleSumbit}>
-      <img src={imgFile ? imgFile : imgUrlForSave ? imgUrlForSave : defaultAvartar} onClick={handleClickImage} />
-      <input name="nickname" type="text" defaultValue={prevUserData ? prevUserData[0]?.nickname : ''} />
-      {validErrors['nickname'] && validErrors['nickname'].map((msg) => <span key={msg}>{msg}</span>)}
-      <input name="blog_name" type="text" defaultValue={prevUserData ? prevUserData[0]?.blog_name : ''} />
-      {validErrors['blog_name'] && validErrors['blog_name'].map((msg) => <span key={msg}>{msg}</span>)}
-      <StFileInput
-        name="profile_image"
-        type="file"
-        accept="image/png, image/jpeg, image/jpg"
-        ref={imgRef}
-        onChange={handleUploadAvartar}
-      />
-      {validErrors['profile_image'] && validErrors['profile_image'].map((msg) => <span key={msg}>{msg}</span>)}
-      {uploadError && <span>프로필 수정 실패!</span>}
+    <StCustomLoginContainer>
+      <StTitle>회원 정보</StTitle>
+      <StUserDataForm onSubmit={handleSumbit}>
+        <StUserImage
+          src={imgFile ? imgFile : imgUrlForSave ? imgUrlForSave : defaultAvartar}
+          onClick={handleClickImage}
+        />
+        <StUserDataContainer>
+          <StInputDiv>
+            <label>닉네임</label>
+            <SterrorUl>
+              {validErrors['nickname'] && validErrors['nickname'].map((msg) => <li key={msg}>{msg}</li>)}
+            </SterrorUl>
+            <StInput name="nickname" type="text" defaultValue={prevUserData ? prevUserData[0]?.nickname : ''} />
+          </StInputDiv>
 
-      <button type="submit">등록하기</button>
-    </form>
+          <StInputDiv>
+            <label>블로그명</label>
+            <SterrorUl>
+              {validErrors['blog_name'] && validErrors['blog_name'].map((msg) => <li key={msg}>{msg}</li>)}
+            </SterrorUl>
+            <StInput name="blog_name" type="text" defaultValue={prevUserData ? prevUserData[0]?.blog_name : ''} />
+          </StInputDiv>
+
+          <StFileInput
+            name="profile_image"
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            ref={imgRef}
+            onChange={handleUploadAvartar}
+          />
+          <SterrorUl>
+            {validErrors['profile_image'] && validErrors['profile_image'].map((msg) => <li key={msg}>{msg}</li>)}
+            {uploadError && <li>프로필 수정 실패!</li>}
+          </SterrorUl>
+
+          <StJoinButton type="submit">등록하기</StJoinButton>
+        </StUserDataContainer>
+      </StUserDataForm>
+    </StCustomLoginContainer>
   );
 }
 
@@ -159,4 +179,66 @@ export default SetUserData;
 
 const StFileInput = styled.input`
   visibility: hidden;
+`;
+const StCustomLoginContainer = styled(StLoginContainer)`
+  gap: 60px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+`;
+const StUserDataForm = styled.form`
+  display: flex;
+  width: 700px;
+  gap: 20px;
+`;
+const StUserImage = styled.img`
+  width: 300px;
+  height: 300px;
+  border-radius: 15px;
+  object-fit: cover;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 0px 3px 2px rgba(255, 69, 97, 0.74);
+    -webkit-box-shadow: 0px 0px 3px 2px rgba(255, 69, 97, 0.74);
+    -moz-box-shadow: 0px 0px 3px 2px rgba(255, 69, 97, 0.74);
+  }
+`;
+const StUserDataContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+`;
+
+const StInputDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 8px;
+  font-size: 20px;
+`;
+const StInput = styled.input`
+  /* flex-grow: 1; */
+  height: 55px;
+  width: 450px;
+  box-sizing: border-box;
+  gap: 10px;
+  padding: 0 10px;
+  border-radius: 10px;
+  font-size: 20px;
+`;
+export const StJoinButton = styled(StButtonBox)`
+  cursor: pointer;
+  color: white;
+  background-color: #ff6077;
+  border: none;
+  &:hover {
+    background: #ff3553;
+  }
+  img {
+    filter: invert(100%);
+  }
 `;
