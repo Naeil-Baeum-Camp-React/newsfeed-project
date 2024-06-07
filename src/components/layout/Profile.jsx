@@ -27,7 +27,7 @@ function Profile() {
           setGitHubUrlLinks(response.data[0].git_hub_url);
         }
       });
-  }, []);
+  }, [userData.userId]);
   return (
     <Wrapper>
       {/* <BlogTitle>{blogNameModify}</BlogTitle> */}
