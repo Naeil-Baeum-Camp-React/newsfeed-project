@@ -67,43 +67,69 @@ function ProfileDetailPage() {
       <Wrapper>
         <Text>BLAR</Text>
         <Border></Border>
-        <Image src={userImage} onClick={() => fileInput.current.click()}></Image>
-        <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} hidden />
-        <NickName
-          placeholder="닉네임을 입력해 주세요"
-          value={nickName}
-          onChange={(e) => setNickName(e.target.value)}
-        ></NickName>
-        <ProfileInformation
-          placeholder="소개말을 입력해 주세요"
-          value={userInformation}
-          onChange={(e) => setUserInformation(e.target.value)}
-        ></ProfileInformation>
-        <BlogName
-          placeholder="블로그 이름을 작성해 주세요"
-          value={blogNameModify}
-          onChange={(e) => setBlogNameModify(e.target.value)}
-        ></BlogName>
-        <GigHubUrlLink
-          placeholder="url을 입력해 주세요"
-          value={gitHubUrlLinks}
-          onChange={(e) => setGitHubUrlLinks(e.target.value)}
-        ></GigHubUrlLink>
-        <SaveButton onClick={handlerSaveBtn}>저장</SaveButton>
-        <CancelButton onClick={() => navigate(`/${userData.userId}/blog/posts`)}>취소</CancelButton>
+        <Title>유저 상세 정보</Title>
+        <ImageContent>
+          <Image src={userImage} onClick={() => fileInput.current.click()}></Image>
+          <InfoContainer>
+            <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} hidden />
+
+            <InputContainer>
+              <label htmlFor="nickName">닉네임</label>
+              <NickName
+                id="nickName"
+                placeholder="닉네임을 입력해 주세요"
+                value={nickName}
+                onChange={(e) => setNickName(e.target.value)}
+              />
+            </InputContainer>
+
+            <InputContainer>
+              <label htmlFor="userInformation">소개말</label>
+              <ProfileInformation
+                id="userInformation"
+                placeholder="소개말을 입력해 주세요"
+                value={userInformation}
+                onChange={(e) => setUserInformation(e.target.value)}
+              />
+            </InputContainer>
+
+            <InputContainer>
+              <label htmlFor="blogName">닉네임</label>
+              <BlogName
+                id="blogName"
+                placeholder="블로그 이름을 작성해 주세요"
+                value={blogNameModify}
+                onChange={(e) => setBlogNameModify(e.target.value)}
+              />
+            </InputContainer>
+
+            <InputContainer>
+              <label htmlFor="gitHubUrl">깃허브 링크</label>
+              <GigHubUrlLink
+                id="gitHubUrl"
+                placeholder="url을 입력해 주세요"
+                value={gitHubUrlLinks}
+                onChange={(e) => setGitHubUrlLinks(e.target.value)}
+              />
+            </InputContainer>
+          </InfoContainer>
+        </ImageContent>
+        <ButtonContainer>
+          <SaveButton onClick={handlerSaveBtn}>저장</SaveButton>
+          <CancelButton onClick={() => navigate(`/${userData.userId}/blog/posts`)}>취소</CancelButton>
+        </ButtonContainer>
       </Wrapper>
     </>
   );
 }
 
 const Wrapper = styled.div`
-  /* Frame 2 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
-  position: absolute;
-  width: 1056px;
-  height: 664px;
-  left: 26px;
-  top: 16px;
+  height: 100%;
 
   background: #ffffff;
   box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
@@ -117,7 +143,7 @@ const Text = styled.p`
   width: 54px;
   height: 24px;
   left: calc(50% - 54px / 2);
-  top: 2px;
+  top: 20px;
 
   font-family: 'Istok Web';
   font-style: normal;
@@ -141,106 +167,110 @@ const Border = styled.p`
   border: 1px solid #ffffff;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
 `;
-
+const Title = styled.div`
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 55px;
+`;
+const ImageContent = styled.div`
+  display: flex;
+`;
 const Image = styled.img`
   /* 이미지 */
 
   box-sizing: border-box;
 
-  position: absolute;
-  width: 140px;
-  height: 138px;
-  left: 449px;
-  top: 111px;
+  width: 300px;
+  height: 300px;
 
   border: 2px solid #e0e0e0;
   border-radius: 10px;
+  object-fit: cover;
 `;
-const NickName = styled.input`
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 350px;
+  margin-left: 20px;
+`;
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+`;
+const CommonInput = styled.input`
+  width: 300px;
+  height: 40px;
+`;
+const NickName = styled(CommonInput)`
   /* 닉네임 */
 
   box-sizing: border-box;
-
-  position: absolute;
-  width: 140px;
-  height: 40px;
-  left: 449px;
-  top: 255px;
 
   border: 2px solid #e0e0e0;
   border-radius: 10px;
 `;
 const ProfileInformation = styled.textarea`
   /* 프로필 기본사항 */
-
+  width: 300px;
+  height: 65px;
   box-sizing: border-box;
-
-  position: absolute;
-  width: 140px;
-  height: 168px;
-  left: 449px;
-  top: 301px;
 
   border: 2px solid #e0e0e0;
   border-radius: 10px;
 `;
-const BlogName = styled.input`
+const BlogName = styled(CommonInput)`
   /* 블로그명 수정 */
 
   box-sizing: border-box;
 
-  position: absolute;
-  width: 140px;
-  height: 40px;
-  left: 449px;
-  top: 472px;
-
   border: 2px solid #e0e0e0;
   border-radius: 10px;
 `;
 
-const GigHubUrlLink = styled.input`
+const GigHubUrlLink = styled(CommonInput)`
   /* gitHub url 링크 */
 
   box-sizing: border-box;
 
-  position: absolute;
-  width: 140px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+`;
+
+const CommonButton = styled.button`
+  width: 200px;
   height: 40px;
-  left: 449px;
-  top: 517px;
-
-  border: 2px solid #e0e0e0;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
   border-radius: 10px;
+  cursor: pointer;
+  transition-duration: 250ms;
 `;
-
-const SaveButton = styled.button`
+const SaveButton = styled(CommonButton)`
   /* 저장 버튼 */
-
+  &:hover {
+    background-color: #ff6078;
+    color: white;
+  }
+  background-color: #ffd4db;
   box-sizing: border-box;
-
-  position: absolute;
-  width: 68px;
-  height: 34px;
-  left: 449px;
-  top: 561px;
-
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
 `;
 
-const CancelButton = styled.button`
+const CancelButton = styled(CommonButton)`
   /* 취소 버튼*/
-
+  &:hover {
+    background-color: #5b5b5b;
+    color: white;
+  }
+  background-color: #e0e0e0;
   box-sizing: border-box;
-
-  position: absolute;
-  width: 68px;
-  height: 34px;
-  left: 521px;
-  top: 561px;
-
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
 `;
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+`;
+
 export default ProfileDetailPage;
