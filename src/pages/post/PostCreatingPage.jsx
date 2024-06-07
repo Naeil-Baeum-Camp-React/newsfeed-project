@@ -91,18 +91,22 @@ const ButtonWrapper = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
 `;
 const PostSaveButton = styled.button`
-  min-width: 100px;
+  width: 200px;
+  height: 35px;
+  padding: 0 10px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
-  background-color: #3aa6b9;
-  border: 1px solid #3aa6b9;
+  background-color: #ff6077;
+  border: 1px solid #ff6077;
   border-radius: 10px;
   color: white;
+  box-sizing: border-box;
+  transition-duration: 250ms;
 
   &:hover {
     cursor: pointer;
@@ -112,6 +116,9 @@ const PostSaveButton = styled.button`
   }
 `;
 const PostCancelButton = styled.button`
+  width: 200px;
+  height: 35px;
+  padding: 0 10px;
   min-width: 100px;
   font-family: 'Inter';
   font-style: normal;
@@ -121,6 +128,8 @@ const PostCancelButton = styled.button`
   border: 1px solid #3aa6b9;
   border-radius: 10px;
   color: #3aa6b9;
+  box-sizing: border-box;
+  transition-duration: 250ms;
 
   &:hover {
     cursor: pointer;

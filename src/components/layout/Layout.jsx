@@ -1,8 +1,8 @@
-import Top from './Top.jsx';
+import { Outlet } from 'react-router-dom';
+import styled from 'styled-components';
 import MenuBar from './MenuBar.jsx';
 import Profile from './Profile.jsx';
-import styled from 'styled-components';
-import { Outlet } from 'react-router-dom';
+import Top from './Top.jsx';
 
 function Layout() {
   return (
@@ -18,17 +18,15 @@ function Layout() {
 }
 
 const LayoutWrapper = styled.div`
-    /* Group 6 */
+  /* Group 6 */
 
   position: absolute;
   width: 1200px;
   height: 800px;
-
-
 `;
 
 const Contents = styled.div`
-    /* Rectangle 279 */
+  /* Rectangle 279 */
 
   box-sizing: border-box;
 
@@ -36,9 +34,9 @@ const Contents = styled.div`
   width: 1140px;
   height: 750px;
 
-  border: 1px dashed #FFFFFF;
+  border: 1px dashed #ffffff;
   border-radius: 20px;
 
-    overflow: auto; /* 스크롤 추가 */
+  overflow: auto; /* 스크롤 추가 */
 `;
 export default Layout;
