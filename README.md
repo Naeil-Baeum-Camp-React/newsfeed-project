@@ -1,22 +1,9 @@
-# BlaBla Blog(블라블라 블로그)
+# 뉴스피드 프로젝트 : BlaBla Blog
 
 ## 🖥️ 프로젝트 소개
-
-<br>
-
-## 🕰️ 개발 기간
-
-- 2024.05.31. ~ 2024.06.06.(총 8일)
-
-<br>
-
-## 👨‍👩‍👧‍👦팀원 구성
-
-### SUPER RUKIE (슈퍼루키🌟)
-| 팀장       | 부팀장     | 팀원       | 팀원      | 
-| ---------- | ---------- | ---------- | ----------|
-| 백현명     | 이인       | 정주신      | 한소영     | 
-|@whitewise95  | @LeLu815  | @JOYmet33  | @fjw1010  |
+'싸이월드' 감성을 살린 다이어리 블로그로 일상을 공유!
+나의 팔로워 블로그는 따로 한번에!
+모든 유저의 블로그를 한번에!
 
 <br>
 
@@ -34,14 +21,36 @@
 - 팔로워/전체블로그 기능
   - 전체블로그에서 모든 유저의 블로그(프로필) 확인 가능
   - 타 유저의 블로그 클릭 후 상단 좌측에 '팔로워' 클릭 시 '내 팔로잉 리스트'에서 확인 가능
+
+<br>
+
+## 🕰️ 개발 기간
+
+- 2024.05.31. ~ 2024.06.06.(총 8일)
  
  <br>
+
+ ## 👨‍👩‍👧‍👦팀원 구성
+
+### SUPER RUKIE (슈퍼루키🌟)
+| 팀장       | 부팀장     | 팀원       | 팀원      | 
+| ---------- | ---------- | ---------- | ----------|
+| 백현명     | 이인       | 정주신      | 한소영     | 
+|@whitewise95  | @LeLu815  | @JOYmet33  | @fjw1010  |
+
+<br>
  
  ## ⚙️ 개발 환경
 - Github
 - Slack
 - Zep
 - Figma
+- 
+<br>
+
+## 🍳 기술 스택
+
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)![ESLint](https://img.shields.io/badge/ESLint-4B3263?style=for-the-badge&logo=eslint&logoColor=white)![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 
 <br>
 
