@@ -4,6 +4,7 @@ import supabase from '../../config/supabase';
 
 import styled from 'styled-components';
 import { useUser } from '../../contexts/login.context';
+import { useModal } from '../../contexts/popup.context';
 import { loginResolver } from '../../validation/userSchema';
 import { StJoinButton, StLoginContainer, StTitle, SterrorUl } from './LoginStyle';
 
@@ -11,6 +12,7 @@ function LoginPage() {
   const [messsages, setMessages] = useState(null);
   const { userData, login } = useUser();
   const navigate = useNavigate();
+  const { openModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,7 +29,7 @@ function LoginPage() {
       password: formDataObj.password,
     });
     if (error) {
-      alert('로그인에 실패했습니다!');
+      openModal('로그인 실패', '입력한 정보를 다시 확인해주세요.');
       setMessages(null);
     } else {
       login();

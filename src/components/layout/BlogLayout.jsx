@@ -1,16 +1,16 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useUser } from '../../contexts/login.context.jsx';
 import MenuBar from './MenuBar.jsx';
 import Profile from './Profile.jsx';
 import Top from './Top.jsx';
-import { useUser } from '../../contexts/login.context.jsx';
 
 function BlogLayout() {
   const { userData } = useUser();
   const navigate = useNavigate();
 
-  if (!userData.isLogedIn){
-    navigate("/login")
+  if (!userData.isLogedIn) {
+    navigate('/login');
   }
 
   return (

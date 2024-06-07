@@ -1,10 +1,12 @@
-import styled from 'styled-components';
-import { useNavigate, useParams } from 'react-router-dom';
-import supabase from '../../config/supabase.js';
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import supabase from '../../config/supabase.js';
+import { useUser } from '../../contexts/login.context.jsx';
 import formatDate, { DATE_FORMATS } from '../../utils/dateFormatUtils.js';
 
 function PostDetailPage() {
+  const { userData } = useUser();
   const { postId, userId } = useParams();
 
   const [post, setPost] = useState({
@@ -26,7 +28,6 @@ function PostDetailPage() {
       .then((response) => {
         const { data, error } = response;
         if (error) {
-          console.error(error.message);
           alert('오류가 발생했습니다.');
           navigate(`/${userId}/blog/posts`);
         }
@@ -49,7 +50,6 @@ function PostDetailPage() {
       .eq('id', postId)
       .select();
     if (error) {
-      console.error(error.message);
       alert('게시글 업데이트에 실패했습니다.');
       navigate(`/${userId}/blog/posts`);
     }
@@ -64,7 +64,6 @@ function PostDetailPage() {
     if (window.confirm('정말로 게시글을 삭제하시겠습니까?')) {
       const { error } = await supabase.from('POSTS').delete().eq('id', postId);
       if (error) {
-        console.error(error.message);
         alert('게시글 삭제에 실패했습니다.');
         navigate(`/${userId}/blog/posts`);
       }
@@ -91,14 +90,20 @@ function PostDetailPage() {
           <PostContentP>{post.contents}</PostContentP>
         )}
         <ButtonWrapper>
-          <PostSaveButton
-            onClick={() => {
-              isEditing ? handleTogglePost() : setIsEditing(true);
-            }}
-          >
-            {isEditing ? '수정 완료' : '수정'}
-          </PostSaveButton>
-          {isEditing ? (
+          {userData.userId !== userId ? (
+            ''
+          ) : (
+            <PostSaveButton
+              onClick={() => {
+                isEditing ? handleTogglePost() : setIsEditing(true);
+              }}
+            >
+              {isEditing ? '수정 완료' : '수정'}
+            </PostSaveButton>
+          )}
+          {userData.userId !== userId ? (
+            ''
+          ) : isEditing ? (
             <PostCancelButton onClick={() => navigate(`/${userId}/blog/posts`)}>수정 취소</PostCancelButton>
           ) : (
             <PostCancelButton onClick={handleDeletePost}>삭제</PostCancelButton>

@@ -11,7 +11,7 @@ function FollowPage() {
 
   useEffect(() => {
     fetchFollowList();
-  });
+  }, []);
 
   const fetchFollowList = (searchKeyword = '') => {
       supabase.rpc('fetch_user_follows', {
