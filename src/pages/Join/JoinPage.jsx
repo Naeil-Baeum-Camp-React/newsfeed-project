@@ -153,7 +153,6 @@ const StInput = styled.input`
   padding: 0 10px;
   border-radius: 10px;
   font-size: 20px;
-  border: none;
 `;
 const StJoinDiv = styled.div`
   display: flex;
