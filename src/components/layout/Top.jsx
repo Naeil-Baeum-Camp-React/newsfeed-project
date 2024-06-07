@@ -220,16 +220,14 @@ const LogoutDiv = styled.div`
   height: 30px;
   top: 30px;
   left: 700px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100;
+  font-size: 16px;
+  line-height: 19px;
+  cursor: pointer;
+  color: #3a3e41;
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 100;
-    font-size: 16px;
-    line-height: 19px;
-    cursor: pointer;
-    color: #3a3e41;
-
-    background:red;
 `;
 
 const FollowButton = styled.button`
