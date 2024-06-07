@@ -72,11 +72,11 @@ function ProfileDetailPage() {
         <Text>BLAR</Text>
         <Border></Border>
         <Image src={userImage} onClick={() => fileInput.current.click()}></Image>
-        <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} hidden />
-        <NickName placeholder="닉네임을 입력해 주세요" value={nickName} onChange={(e) => setNickName(e.target.value)}></NickName>
-        <ProfileInformation placeholder="정보를 입력해 주세요" value={userInformation} onChange={(e) => setUserInformation(e.target.value)}></ProfileInformation>
-        <BlogName placeholder="블로그명 수정" value={blogNameModify} onChange={(e) => setBlogNameModify(e.target.value)}></BlogName>
-        <GigHubUrlLink placeholder="url 입력해 주세요" value={gitHubUrlLinks} onChange={(e) => setGitHubUrlLinks(e.target.value)}></GigHubUrlLink>
+        <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} hidden/>
+        <NickName placeholder='닉네임을 입력해 주세요' value={nickName} onChange={(e) => setNickName(e.target.value)}></NickName>
+        <ProfileInformation placeholder='소개말을 입력해 주세요' value={userInformation} onChange={(e) => setUserInformation(e.target.value)}></ProfileInformation>
+        <BlogName placeholder='블로그 이름을 작성해 주세요' value={blogNameModify} onChange={(e) => setBlogNameModify(e.target.value)}></BlogName>
+        <GigHubUrlLink placeholder='url을 입력해 주세요' value={gitHubUrlLinks} onChange={(e) => setGitHubUrlLinks(e.target.value)}></GigHubUrlLink>
         <SaveButton onClick={handlerSaveBtn}>저장</SaveButton>
         <CancelButton onClick={() => navigate(`/${userData.userId}/blog/posts`)}>취소</CancelButton>
       </Wrapper>
@@ -161,7 +161,7 @@ const NickName = styled.input`
     border: 2px solid #E0E0E0;
     border-radius: 10px;
 
-`
+`;
 const ProfileInformation = styled.textarea`
     /* 프로필 기본사항 */
 
