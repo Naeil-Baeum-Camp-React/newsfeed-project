@@ -68,7 +68,7 @@ function ProfileDetailPage() {
         </Logo>
         <Border></Border>
         <Image src={userImage} onClick={() => fileInput.current.click()}></Image>
-        <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} />
+        <input type="file" ref={fileInput} onChange={(e) => imageUpload(e)} hidden/>
         <NickName value={nickName} onChange={(e) => setNickName(e.target.value)}></NickName>
         <ProfileInformation
           value={userInformation}
