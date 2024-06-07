@@ -123,7 +123,6 @@ function Top() {
 }
 
 const Follower = styled.div`
-  margin-left: 30px;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
@@ -131,6 +130,9 @@ const Follower = styled.div`
   line-height: 19px;
 
   color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const TopWrapper = styled.div`
@@ -153,12 +155,16 @@ const LeftWrapper = styled.div`
 
   background: #ffffff;
   border-radius: 10px 20px 0px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const LeftContainer = styled.div`
-  position: absolute;
-  left: 27px;
-  top: 23px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 `;
 
 const LogoText = styled.p`
@@ -228,6 +234,12 @@ const LogoutDiv = styled.div`
   line-height: 19px;
 
   color: #3a3e41;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+  transition-duration: 200ms;
 `;
 
 const FollowButton = styled.button`
