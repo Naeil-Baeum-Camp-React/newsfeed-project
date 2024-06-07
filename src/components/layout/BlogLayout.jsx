@@ -19,6 +19,7 @@ function BlogLayout() {
       <MenuBar />
       <Contents>
         <Outlet />
+        <MarginBottom />
       </Contents>
       <Profile />
     </BlogLayoutWrapper>
@@ -42,5 +43,8 @@ const Contents = styled.div`
   box-shadow: 5px 3px 3px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   overflow: auto; /* 스크롤 추가 */
+`;
+const MarginBottom = styled.div`
+  height: 30px;
 `;
 export default BlogLayout;
