@@ -82,8 +82,14 @@ const PostsContents = styled.p`
   word-break: break-all;
 `;
 const PostsCreatedAt = styled.p`
-  width: 100%;
-  height: 29px;
+  width: 200px;
+  background-color: #f4f4f4;
+  color: #7d7d7d;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
 `;
 
 const PostsWrapper = styled.div`
@@ -110,13 +116,13 @@ const MenuName = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 29px;
-  color: #3aa6b9;
+  color: #ff6077;
 `;
 
 const MenuNameBottomLine = styled.div`
   width: 50px;
   margin: 0 auto;
-  border: 1px solid #3aa6b9;
+  border: 1px solid#FF6077;
 `;
 
 const PostsContainer = styled.div`
@@ -131,6 +137,7 @@ const PostsContainer = styled.div`
 `;
 
 const PostsBox = styled.div`
+  padding: 0 30px;
   margin-top: 20px;
   margin-bottom: 20px;
   width: 600px;

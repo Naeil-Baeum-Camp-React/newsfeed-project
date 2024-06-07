@@ -46,7 +46,7 @@ function MenuBar() {
             $menuName={menuName}
             onClick={() => onClickHandler(path, menuName)}
           >
-            <MenuName>{menuName}</MenuName>
+            <MenuName $select={activeMenuName === menuName}>{menuName}</MenuName>
           </Menu>
         );
       })}
@@ -64,7 +64,6 @@ const MenuWrapper = styled.div`
 
 const Menu = styled.div`
   box-sizing: border-box;
-
   margin-top: 5px;
   width: 78px;
   height: 30px;
@@ -94,12 +93,12 @@ const MenuName = styled.p`
   font-style: normal;
   font-size: 10px;
   text-align: center;
-  color: black;
 
   display: flex;
   justify-content: center;
   align-items: center;
   padding-top: 2px;
+  color: ${(props) => (props.$select ? 'white' : 'black')};
 `;
 
 export default MenuBar;
