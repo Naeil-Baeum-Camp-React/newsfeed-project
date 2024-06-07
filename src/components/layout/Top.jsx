@@ -189,7 +189,7 @@ const Logo = styled.div`
   position: absolute;
   width: 30px;
   height: 30px;
-  background: #3aa6b9;
+  background: #ff6077;
   border-radius: 10px;
 `;
 
