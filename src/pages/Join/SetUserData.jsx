@@ -135,41 +135,42 @@ function SetUserData() {
     <StCustomLoginContainer>
       <StTitle>회원 정보</StTitle>
       <StUserDataForm onSubmit={handleSumbit}>
-        <StUserImage
-          src={imgFile ? imgFile : imgUrlForSave ? imgUrlForSave : defaultAvartar}
-          onClick={handleClickImage}
-        />
-        <StUserDataContainer>
-          <StInputDiv>
-            <label>닉네임</label>
-            <SterrorUl>
-              {validErrors['nickname'] && validErrors['nickname'].map((msg) => <li key={msg}>{msg}</li>)}
-            </SterrorUl>
-            <StInput name="nickname" type="text" defaultValue={prevUserData ? prevUserData[0]?.nickname : ''} />
-          </StInputDiv>
-
-          <StInputDiv>
-            <label>블로그명</label>
-            <SterrorUl>
-              {validErrors['blog_name'] && validErrors['blog_name'].map((msg) => <li key={msg}>{msg}</li>)}
-            </SterrorUl>
-            <StInput name="blog_name" type="text" defaultValue={prevUserData ? prevUserData[0]?.blog_name : ''} />
-          </StInputDiv>
-
-          <StFileInput
-            name="profile_image"
-            type="file"
-            accept="image/png, image/jpeg, image/jpg"
-            ref={imgRef}
-            onChange={handleUploadAvartar}
+        <StDivMiddle>
+          <StUserImage
+            src={imgFile ? imgFile : imgUrlForSave ? imgUrlForSave : defaultAvartar}
+            onClick={handleClickImage}
           />
-          <SterrorUl>
-            {validErrors['profile_image'] && validErrors['profile_image'].map((msg) => <li key={msg}>{msg}</li>)}
-            {uploadError && <li>프로필 수정 실패!</li>}
-          </SterrorUl>
+          <StUserDataContainer>
+            <StInputDiv>
+              <label>닉네임</label>
+              <SterrorUl>
+                {validErrors['nickname'] && validErrors['nickname'].map((msg) => <li key={msg}>{msg}</li>)}
+              </SterrorUl>
+              <StInput name="nickname" type="text" defaultValue={prevUserData ? prevUserData[0]?.nickname : ''} />
+            </StInputDiv>
 
-          <StJoinButton type="submit">등록하기</StJoinButton>
-        </StUserDataContainer>
+            <StInputDiv>
+              <label>블로그명</label>
+              <SterrorUl>
+                {validErrors['blog_name'] && validErrors['blog_name'].map((msg) => <li key={msg}>{msg}</li>)}
+              </SterrorUl>
+              <StInput name="blog_name" type="text" defaultValue={prevUserData ? prevUserData[0]?.blog_name : ''} />
+            </StInputDiv>
+
+            <StFileInput
+              name="profile_image"
+              type="file"
+              accept="image/png, image/jpeg, image/jpg"
+              ref={imgRef}
+              onChange={handleUploadAvartar}
+            />
+            {/* <SterrorUl>
+              {validErrors['profile_image'] && validErrors['profile_image'].map((msg) => <li key={msg}>{msg}</li>)}
+              {uploadError && <li>프로필 수정 실패!</li>}
+            </SterrorUl> */}
+          </StUserDataContainer>
+        </StDivMiddle>
+        <StJoinButton type="submit">등록하기</StJoinButton>
       </StUserDataForm>
     </StCustomLoginContainer>
   );
@@ -179,9 +180,11 @@ export default SetUserData;
 
 const StFileInput = styled.input`
   visibility: hidden;
+  position: absolute;
+  z-index: -1;
 `;
 const StCustomLoginContainer = styled(StLoginContainer)`
-  gap: 60px;
+  gap: 50px;
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -190,12 +193,19 @@ const StCustomLoginContainer = styled(StLoginContainer)`
 `;
 const StUserDataForm = styled.form`
   display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 700px;
+  gap: 70px;
+`;
+const StDivMiddle = styled.div`
+  display: flex;
   gap: 20px;
 `;
+
 const StUserImage = styled.img`
-  width: 300px;
-  height: 300px;
+  width: 220px;
+  height: 220px;
   border-radius: 15px;
   object-fit: cover;
   cursor: pointer;
@@ -223,15 +233,15 @@ const StInputDiv = styled.div`
 const StInput = styled.input`
   /* flex-grow: 1; */
   height: 55px;
-  width: 450px;
+  width: 350px;
   box-sizing: border-box;
   gap: 10px;
   padding: 0 10px;
   border-radius: 10px;
   font-size: 20px;
-  border: none;
 `;
 export const StJoinButton = styled(StButtonBox)`
+  width: 590px;
   cursor: pointer;
   color: white;
   background-color: #ff6077;
